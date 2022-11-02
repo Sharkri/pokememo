@@ -6,11 +6,12 @@ import Main from "./components/Main";
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const [cards, setCards] = useState([]);
 
   return (
     <div className="App">
       <Header currentScore={currentScore} bestScore={bestScore} />
-      <Main />
+      <Main cards={cards} />
     </div>
   );
 }
