@@ -1,4 +1,5 @@
 import Card from "./Card";
+import "../styles/Main.css";
 
 export default function Main({ cards }) {
   return (

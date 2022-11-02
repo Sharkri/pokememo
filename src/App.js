@@ -14,7 +14,12 @@ function App() {
 
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  const [cards, setCards] = useState([getRandomFlag()]);
+  const [cards, setCards] = useState([
+    getRandomFlag(),
+    getRandomFlag(),
+    getRandomFlag(),
+    getRandomFlag(),
+  ]);
 
   return (
     <div className="App">
