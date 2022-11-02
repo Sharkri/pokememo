@@ -2,14 +2,14 @@ import { useState } from "react";
 import "./styles/App.css";
 import Header from "./components/Header";
 import Main from "./components/Main";
-import flags from "./flags.json";
+import countries from "./countries.json";
 
 function App() {
   const getRandomFlag = () => {
-    const flag = flags[Math.floor(Math.random() * flags.length)];
-    const image = require(`./images/${flag.code.toLowerCase()}.png`);
+    const country = countries[Math.floor(Math.random() * countries.length)];
+    const flag = require(`./images/${country.code.toLowerCase()}.png`);
 
-    return { image, name: flag.name };
+    return { image: flag, name: country.name };
   };
 
   const [currentScore, setCurrentScore] = useState(0);
