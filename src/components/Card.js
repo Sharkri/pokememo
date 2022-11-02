@@ -1,3 +1,8 @@
 export default function Card({ image, title }) {
-  return <button className="card"></button>;
+  return (
+    <div className="card">
+      <img src={image} alt={`Flag of ${title}`} className="flag" />
+      <p>{title}</p>
+    </div>
+  );
 }
