@@ -5,7 +5,12 @@ import Main from "./components/Main";
 import flags from "./flags.json";
 
 function App() {
-  const getRandomFlag = () => flags[Math.floor(Math.random() * flags.length)];
+  const getRandomFlag = () => {
+    const flag = flags[Math.floor(Math.random() * flags.length)];
+    const image = require(`./images/${flag.code.toLowerCase()}.png`);
+
+    return { image, title: flag.name };
+  };
 
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
