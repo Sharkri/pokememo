@@ -9,7 +9,7 @@ function App() {
     const flag = flags[Math.floor(Math.random() * flags.length)];
     const image = require(`./images/${flag.code.toLowerCase()}.png`);
 
-    return { image, title: flag.name };
+    return { image, name: flag.name };
   };
 
   const [currentScore, setCurrentScore] = useState(0);
