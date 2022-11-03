@@ -1,0 +1,47 @@
+.game-over-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.game-over-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  gap: 18px;
+  background-color: var(--lighter-bg-color);
+  border-radius: 12px;
+  width: 85%;
+  max-width: 325px;
+  padding: 24px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.final-score {
+  font-size: 1.1rem;
+}
+
+.play-again {
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  background-color: #262626;
+  transition: 0.2s;
+  color: rgb(200, 200, 200);
+}
+
+.play-again:hover {
+  color: rgb(221, 221, 221);
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
+}
