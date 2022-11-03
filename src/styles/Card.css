@@ -7,10 +7,7 @@
   transition: all 0.2s ease 0s;
   width: 218px;
   background-color: rgba(45, 51, 59, 0.5);
-}
-
-.card:hover {
-  transform: scale(1.08);
+  animation: render 0.3s;
 }
 
 .flag {
@@ -26,4 +23,13 @@
   justify-content: center;
   font-weight: bold;
   width: 100%;
+}
+
+@keyframes render {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }

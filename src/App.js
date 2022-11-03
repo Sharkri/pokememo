@@ -20,6 +20,8 @@ function App() {
     while (availableCards.length) {
       const index = getRandomIndex(availableCards);
       const card = availableCards[index];
+      // Need to give a new key/uniqid for react to detect a rerender
+      card.id = uniqid();
       shuffledCards.push(card);
       availableCards.splice(index, 1);
     }
