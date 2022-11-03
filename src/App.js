@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import countries from "./countries.json";
 import uniqid from "uniqid";
+import GameOverModal from "./components/GameOverModal";
 
 function App() {
   const getRandomIndex = (array) => Math.floor(Math.random() * array.length);
@@ -33,6 +34,7 @@ function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [cards, setCards] = useState(pickRandomCountries(4));
+  const [isGameOver, setIsGameOver] = useState(false);
 
   function shuffleCards() {
     const availableCards = [...cards];
@@ -63,7 +65,7 @@ function App() {
     const cardIndex = e.currentTarget.dataset.index;
     const card = cards[cardIndex];
     if (card.isClicked) {
-      // Display game over
+      setIsGameOver(true);
       return;
     }
 
@@ -74,6 +76,7 @@ function App() {
 
   return (
     <div className="App">
+      {isGameOver && <GameOverModal score={currentScore} />}
       <Header currentScore={currentScore} bestScore={bestScore} />
       <Main cards={cards} onClick={handleCardClick} />
     </div>
