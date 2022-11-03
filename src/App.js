@@ -27,6 +27,18 @@ function App() {
   const [bestScore, setBestScore] = useState(0);
   const [cards, setCards] = useState(pickRandomCountries(4));
 
+  function shuffleCards() {
+    const availableCards = [...cards];
+    const shuffledCards = [];
+    while (availableCards.length) {
+      const index = Math.floor(Math.random() * availableCards.length);
+      const card = availableCards[index];
+      shuffledCards.push(card);
+      availableCards.splice(index, 1);
+    }
+    setCards(shuffledCards);
+  }
+
   return (
     <div className="App">
       <Header currentScore={currentScore} bestScore={bestScore} />
