@@ -1,8 +1,8 @@
 import "../styles/Card.css";
 
-export default function Card({ image, name, onClick }) {
+export default function Card({ image, name, onClick, index }) {
   return (
-    <div className="card" onClick={onClick}>
+    <div className="card" onClick={onClick} data-index={index}>
       <img
         src={image}
         alt={`Flag of ${name}`}
