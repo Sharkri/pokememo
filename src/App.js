@@ -74,9 +74,17 @@ function App() {
     shuffleCards();
   }
 
+  function playAgain() {
+    setIsGameOver(false);
+    setCurrentScore(0);
+    setCards(pickRandomCountries(4));
+  }
+
   return (
     <div className="App">
-      {isGameOver && <GameOverModal score={currentScore} />}
+      {isGameOver && (
+        <GameOverModal score={currentScore} onPlayAgain={playAgain} />
+      )}
       <Header currentScore={currentScore} bestScore={bestScore} />
       <Main cards={cards} onClick={handleCardClick} />
     </div>
