@@ -7,12 +7,19 @@ import uniqid from "uniqid";
 
 function App() {
   const pickRandomCountries = (countryAmount) => {
+    // Clone countries to avoid modifying original array
+    const availableCountries = [...countries];
     const randomCountries = [];
     for (let i = 0; i < countryAmount; i++) {
-      const country = countries[Math.floor(Math.random() * countries.length)];
+      // Get random index
+      const index = Math.floor(Math.random() * availableCountries.length);
+      const country = availableCountries[index];
       const flag = require(`./images/${country.code.toLowerCase()}.png`);
       randomCountries.push({ image: flag, name: country.name, id: uniqid() });
+      // Remove the country at index selected to avoid duplicates appearing
+      availableCountries.splice(index, 1);
     }
+
     return randomCountries;
   };
 
