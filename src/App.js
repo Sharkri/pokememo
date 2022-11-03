@@ -20,7 +20,7 @@ function App() {
       randomCountries.push({
         image: flag,
         name: country.name,
-        clicked: false,
+        isClicked: false,
         id: uniqid(),
       });
       // Remove the country at index selected to avoid duplicates appearing
@@ -52,7 +52,22 @@ function App() {
     // Check if current score exceeded best score
     if (incrementedScore > bestScore) setBestScore(incrementedScore);
   }
+
+  function setIsClicked(index) {
+    const newCards = [...cards];
+    newCards[index].isClicked = true;
+    setCards(newCards);
+  }
+
   function handleCardClick(e) {
+    const cardIndex = e.currentTarget.dataset.index;
+    const card = cards[cardIndex];
+    if (card.isClicked) {
+      // Display game over
+      return;
+    }
+
+    setIsClicked(cardIndex);
     incrementScore();
     shuffleCards();
   }
