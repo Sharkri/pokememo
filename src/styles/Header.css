@@ -5,3 +5,7 @@ header {
   flex-direction: column;
   align-items: center;
 }
+
+header h1 {
+  margin-bottom: 12px;
+}
