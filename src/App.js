@@ -6,14 +6,14 @@ import countries from "./countries.json";
 import uniqid from "uniqid";
 
 function App() {
-  const pickRandomCountries = (number) => {
-    const array = [];
-    for (let i = 0; i < number; i++) {
+  const pickRandomCountries = (countryAmount) => {
+    const randomCountries = [];
+    for (let i = 0; i < countryAmount; i++) {
       const country = countries[Math.floor(Math.random() * countries.length)];
       const flag = require(`./images/${country.code.toLowerCase()}.png`);
-      array.push({ image: flag, name: country.name, id: uniqid() });
+      randomCountries.push({ image: flag, name: country.name, id: uniqid() });
     }
-    return array;
+    return randomCountries;
   };
 
   const [currentScore, setCurrentScore] = useState(0);
