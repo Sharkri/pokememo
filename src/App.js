@@ -42,7 +42,7 @@ function App() {
   return (
     <div className="App">
       <Header currentScore={currentScore} bestScore={bestScore} />
-      <Main cards={cards} />
+      <Main cards={cards} onClick={shuffleCards} />
     </div>
   );
 }
