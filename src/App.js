@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles/App.css";
 import Header from "./components/Header";
 import Main from "./components/Main";
@@ -9,31 +9,9 @@ import GameOverModal from "./components/GameOverModal";
 function App() {
   const getRandomIndex = (array) => Math.floor(Math.random() * array.length);
 
-  const pickRandomCountries = (countryAmount) => {
-    // Clone countries to avoid modifying original array
-    const availableCountries = [...countries];
-    const randomCountries = [];
-    for (let i = 0; i < countryAmount; i++) {
-      // Get random index
-      const index = getRandomIndex(availableCountries);
-      const country = availableCountries[index];
-      const flag = require(`./images/${country.code.toLowerCase()}.png`);
-      randomCountries.push({
-        image: flag,
-        name: country.name,
-        isClicked: false,
-        id: uniqid(),
-      });
-      // Remove the country at index selected to avoid duplicates appearing
-      availableCountries.splice(index, 1);
-    }
-
-    return randomCountries;
-  };
-
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  const [cards, setCards] = useState(pickRandomCountries(4));
+  const [cards, setCards] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
 
   function shuffleCards() {
@@ -74,11 +52,42 @@ function App() {
     shuffleCards();
   }
 
+  const resetCards = () => setCards([]);
   function playAgain() {
     setIsGameOver(false);
     setCurrentScore(0);
-    setCards(pickRandomCountries(4));
+    resetCards();
   }
+
+  useEffect(() => {
+    function getRandomCountries(countryAmount) {
+      // Clone countries to avoid modifying original array
+      const availableCountries = [...countries];
+      const randomCountries = [];
+      for (let i = 0; i < countryAmount; i++) {
+        // Get random index
+        const index = getRandomIndex(availableCountries);
+        const country = availableCountries[index];
+        const flag = require(`./images/${country.code.toLowerCase()}.png`);
+        randomCountries.push({
+          image: flag,
+          name: country.name,
+          isClicked: false,
+          id: uniqid(),
+        });
+        // Remove the country at index selected to avoid duplicates appearing
+        availableCountries.splice(index, 1);
+      }
+
+      return randomCountries;
+    }
+
+    // if every card has been clicked, add two more cards
+    if (cards.every((card) => card.isClicked)) {
+      // Increase the amount of cards by two
+      setCards(getRandomCountries(cards.length + 2));
+    }
+  }, [cards]);
 
   return (
     <div className="App">
