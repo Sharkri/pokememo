@@ -17,7 +17,12 @@ function App() {
       const index = getRandomIndex(availableCountries);
       const country = availableCountries[index];
       const flag = require(`./images/${country.code.toLowerCase()}.png`);
-      randomCountries.push({ image: flag, name: country.name, id: uniqid() });
+      randomCountries.push({
+        image: flag,
+        name: country.name,
+        clicked: false,
+        id: uniqid(),
+      });
       // Remove the country at index selected to avoid duplicates appearing
       availableCountries.splice(index, 1);
     }
@@ -28,6 +33,7 @@ function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [cards, setCards] = useState(pickRandomCountries(4));
+
   function shuffleCards() {
     const availableCards = [...cards];
     const shuffledCards = [];
@@ -39,10 +45,22 @@ function App() {
     }
     setCards(shuffledCards);
   }
+
+  function incrementScore() {
+    const incrementedScore = currentScore + 1;
+    setCurrentScore(incrementedScore);
+    // Check if current score exceeded best score
+    if (incrementedScore > bestScore) setBestScore(incrementedScore);
+  }
+  function handleCardClick(e) {
+    incrementScore();
+    shuffleCards();
+  }
+
   return (
     <div className="App">
       <Header currentScore={currentScore} bestScore={bestScore} />
-      <Main cards={cards} onClick={shuffleCards} />
+      <Main cards={cards} onClick={handleCardClick} />
     </div>
   );
 }
