@@ -9,3 +9,8 @@ header {
 header h1 {
   margin-bottom: 12px;
 }
+
+.scoreboard {
+  display: flex;
+  gap: 12px;
+}

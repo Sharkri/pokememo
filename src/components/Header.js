@@ -4,8 +4,10 @@ export default function Header({ currentScore, bestScore }) {
   return (
     <header>
       <h1>Memory Game</h1>
-      <p>Score: {currentScore}</p>
-      <p>Best Score: {bestScore}</p>
+      <div className="scoreboard">
+        <p>Score: {currentScore}</p>
+        <p>Best Score: {bestScore}</p>
+      </div>
     </header>
   );
 }
