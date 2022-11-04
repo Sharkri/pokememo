@@ -2,6 +2,8 @@
 
 [Live Preview](https://sharkri.github.io/memory-card/)
 
+![Memory Game Preview Gif](assets/memory-game.gif)
+
 ## Getting Started
 
 ### Installing and running
