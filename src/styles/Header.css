@@ -11,13 +11,9 @@ header h1 {
   margin-bottom: 12px;
 }
 
-.scoreboard {
+.stats {
   display: flex;
   gap: 16px;
-}
-
-.scoreboard p {
-  font-size: 17px;
 }
 
 .current-score {
@@ -26,4 +22,8 @@ header h1 {
 
 .best-score {
   color: rgba(255, 152, 152, 0.88);
+}
+
+.level {
+  color: #facc15;
 }

@@ -34,11 +34,11 @@ function App() {
   // How much to increment each level
   const INCREMENT_STEP = 2;
   const INITIAL_CARD_AMOUNT = 4;
-
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [cards, setCards] = useState(getRandomCountries(INITIAL_CARD_AMOUNT));
   const [isGameOver, setIsGameOver] = useState(false);
+  const level = cards.length / INCREMENT_STEP - 1;
 
   function shuffleCards() {
     const availableCards = [...cards];
@@ -101,7 +101,7 @@ function App() {
       {isGameOver && (
         <GameOverModal score={currentScore} onPlayAgain={playAgain} />
       )}
-      <Header currentScore={currentScore} bestScore={bestScore} />
+      <Header currentScore={currentScore} bestScore={bestScore} level={level} />
       <Main cards={cards} onClick={handleCardClick} />
     </div>
   );
