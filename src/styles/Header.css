@@ -13,5 +13,17 @@ header h1 {
 
 .scoreboard {
   display: flex;
-  gap: 12px;
+  gap: 16px;
+}
+
+.scoreboard p {
+  font-size: 17px;
+}
+
+.current-score {
+  color: rgba(188, 255, 152, 0.88);
+}
+
+.best-score {
+  color: rgba(255, 152, 152, 0.88);
 }
