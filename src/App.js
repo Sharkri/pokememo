@@ -38,7 +38,7 @@ function App() {
   const [bestScore, setBestScore] = useState(0);
   const [cards, setCards] = useState(getRandomCountries(INITIAL_CARD_AMOUNT));
   const [isGameOver, setIsGameOver] = useState(false);
-  const level = cards.length / INCREMENT_STEP - 1;
+  const [level, setLevel] = useState(1);
 
   function shuffleCards() {
     const availableCards = [...cards];
@@ -78,8 +78,10 @@ function App() {
     setIsClicked(cardIndex);
     incrementScore();
 
-    // if every card has been clicked go to next level
+    // check if every card has been clicked
     if (cards.every((card) => card.isClicked)) {
+      // go to next level
+      setLevel(level + 1);
       // Add current card amount/length + increment step
       const newCountries = getRandomCountries(cards.length + INCREMENT_STEP);
       setCards(newCountries);
@@ -92,8 +94,8 @@ function App() {
   function playAgain() {
     setIsGameOver(false);
     setCurrentScore(0);
-    // Reset cards to initial amount of cards
     setCards(getRandomCountries(INITIAL_CARD_AMOUNT));
+    setLevel(1);
   }
 
   return (
