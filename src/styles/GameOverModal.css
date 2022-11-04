@@ -26,8 +26,21 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.final-score {
+.final-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   font-size: 1.1rem;
+}
+
+.final-score-number {
+  color: rgba(188, 255, 152, 0.88);
+  font-weight: bold;
+}
+
+.level-reached .level-number {
+  color: #facc15;
+  font-weight: bold;
 }
 
 .play-again {

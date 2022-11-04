@@ -101,7 +101,11 @@ function App() {
   return (
     <div className="App">
       {isGameOver && (
-        <GameOverModal score={currentScore} onPlayAgain={playAgain} />
+        <GameOverModal
+          score={currentScore}
+          level={level}
+          onPlayAgain={playAgain}
+        />
       )}
       <Header currentScore={currentScore} bestScore={bestScore} level={level} />
       <Main cards={cards} onClick={handleCardClick} />
