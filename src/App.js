@@ -24,7 +24,6 @@ function App() {
       let tries = 0;
 
       const isFirstVisit = localStorage.getItem("visited") === null;
-      // increase odds if first visit
       const shiny = Math.random() > (isFirstVisit ? 0.5 : 0.9);
       while (pokemonsToShow.length < amount && tries < 100) {
         const randomId = Math.floor(Math.random() * 1000);
@@ -121,7 +120,7 @@ function App() {
   }
 
   async function handleCardClick(cardIndex) {
-    if (isGameOver) return;
+    if (isGameOver || !cardsShowing) return;
 
     const card = cards[cardIndex];
     if (card.isClicked) {
