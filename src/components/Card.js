@@ -1,20 +1,31 @@
 import "../styles/Card.css";
 import Tilt from "react-parallax-tilt";
 
-export default function Card({ image, name, onClick, showing }) {
+export default function Card({ card, onClick, showing }) {
   return (
-    <Tilt tiltReverse reset>
+    <Tilt
+      tiltReverse
+      reset
+      glareEnable={card.shiny}
+      glareMaxOpacity={0.4}
+      glareColor="#f1b818"
+      glarePosition="all"
+    >
       <div className={`card-container ${showing ? "front" : "back"}`}>
         <div className="card-inner">
           <div className="card-front">
-            <button className="card" onClick={onClick}>
+            <button className="card" data-shiny={card.shiny} onClick={onClick}>
               <img
-                src={image}
-                alt={name}
+                src={card.image}
+                alt={card.name}
                 className="card-image"
                 draggable="false"
               />
-              <p className="card-name">{name}</p>
+              <p className="card-name">
+                <span className="sparkles">{card.shiny && "✨ "}</span>
+                <span className="name">{card.name}</span>
+                <span className="sparkles">{card.shiny && " ✨"}</span>
+              </p>
             </button>
           </div>
           <div className="card-back">

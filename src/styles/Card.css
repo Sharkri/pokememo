@@ -47,6 +47,17 @@
   object-fit: contain;
 }
 
+.card[data-shiny="true"] .card-name .name {
+  background: linear-gradient(120deg, #8c97ff, #90ffb1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sparkles {
+  color: #f1b818;
+}
+
 .card-name {
   font-size: 16px;
   text-overflow: ellipsis;

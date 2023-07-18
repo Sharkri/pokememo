@@ -5,28 +5,39 @@ import uniqid from "uniqid";
 import GameOverModal from "./components/GameOverModal";
 import LoadingScreen from "./components/LoadingScreen";
 
-const getImageUrl = (id) =>
-  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 function App() {
-  const getPokemon = useCallback(async (id) => {
+  const getPokemon = useCallback(async ({ id, shiny }) => {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    const { name } = await res.json();
-    return { name, image: getImageUrl(id), id };
+    const { name, sprites } = await res.json();
+    const image =
+      sprites.other["official-artwork"][
+        shiny ? "front_shiny" : "front_default"
+      ];
+
+    return { name, image, id, shiny };
   }, []);
 
   const getRandomPokemons = useCallback(
     async (amount) => {
-      const pokemonIds = [];
+      const pokemonsToShow = [];
       let tries = 0;
-      while (pokemonIds.length < amount && tries < 100) {
+      const shiny = Math.random() > 0.9;
+
+      while (pokemonsToShow.length < amount && tries < 100) {
         const randomId = Math.floor(Math.random() * 1000);
-        const isDuplicateId = pokemonIds.find((id) => id === randomId);
+
+        const isDuplicateId = pokemonsToShow.find(({ id }) => id === randomId);
         if (isDuplicateId) tries++;
-        else pokemonIds.push(randomId);
+        else pokemonsToShow.push({ id: randomId, shiny: false });
       }
 
-      return await Promise.all(pokemonIds.map(getPokemon));
+      if (shiny) {
+        const randomIndex = Math.floor(Math.random() * pokemonsToShow.length);
+        pokemonsToShow[randomIndex].shiny = true;
+      }
+
+      return await Promise.all(pokemonsToShow.map(getPokemon));
     },
     [getPokemon]
   );
