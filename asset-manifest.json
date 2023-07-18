@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/pokememo/static/css/main.49cbc60e.css",
+    "main.js": "/pokememo/static/js/main.3a7781eb.js",
+    "index.html": "/pokememo/index.html",
+    "main.49cbc60e.css.map": "/pokememo/static/css/main.49cbc60e.css.map",
+    "main.3a7781eb.js.map": "/pokememo/static/js/main.3a7781eb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.49cbc60e.css",
+    "static/js/main.3a7781eb.js"
+  ]
+}
