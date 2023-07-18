@@ -31,10 +31,11 @@ function App() {
     [getPokemon]
   );
 
-  const initializePokemons = useCallback(
-    () => getRandomPokemons(INITIAL_CARD_AMOUNT).then(setCards),
-    [getRandomPokemons]
-  );
+  const initializePokemons = useCallback(() => {
+    const pokemons = getRandomPokemons(INITIAL_CARD_AMOUNT);
+    setCards(null);
+    setTimeout(async () => setCards(await pokemons), CARD_SLEEP_TIME);
+  }, [getRandomPokemons]);
 
   const INCREMENT_STEP = 2;
   const INITIAL_CARD_AMOUNT = 4;
@@ -45,10 +46,12 @@ function App() {
   const [cards, setCards] = useState(null);
   const [isGameOver, setIsGameOver] = useState(false);
   const [level, setLevel] = useState(1);
+  const [bestLevel, setBestLevel] = useState(0);
   const [cardsShowing, setCardsShowing] = useState(true);
 
   useEffect(() => {
     initializePokemons();
+    document.title = "PokéMemo";
   }, [initializePokemons]);
 
   function shuffleCards() {
@@ -73,10 +76,12 @@ function App() {
   }
 
   function handleLevelUp() {
-    setLevel(level + 1);
+    const newLevel = level + 1;
+    setLevel(newLevel);
+    setBestLevel(Math.max(bestLevel, newLevel));
     // Add current card amount/length + increment step
     const pokemons = getRandomPokemons(cards.length + INCREMENT_STEP);
-
+    setCards(null); // show loading screen
     setTimeout(async () => {
       setCards(await pokemons);
       setCardsShowing(true);
@@ -130,7 +135,12 @@ function App() {
           onPlayAgain={playAgain}
         />
       )}
-      <Header currentScore={currentScore} bestScore={bestScore} level={level} />
+      <Header
+        currentScore={currentScore}
+        bestScore={bestScore}
+        level={level}
+        bestLevel={bestLevel}
+      />
 
       <Main
         cards={cards}
