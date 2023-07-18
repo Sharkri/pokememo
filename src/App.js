@@ -39,7 +39,7 @@ function App() {
 
   const INCREMENT_STEP = 2;
   const INITIAL_CARD_AMOUNT = 4;
-  const CARD_SLEEP_TIME = 600;
+  const CARD_SLEEP_TIME = 580;
 
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
@@ -124,7 +124,7 @@ function App() {
     setLevel(1);
   }
 
-  if (cards == null) return <LoadingScreen />;
+  if (cards == null) return <LoadingScreen next={level} />;
 
   return (
     <div className="App">
