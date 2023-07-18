@@ -8,6 +8,8 @@
   transform-origin: left;
   transition: 0.33s;
   animation: render 0.33s;
+  width: 208px;
+  height: 240px;
 }
 
 .card.hide {
@@ -22,13 +24,13 @@
   height: 200px;
 }
 .card-name {
-  margin: 8px 0;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 6px;
   font-weight: bold;
-  width: 100%;
+  max-width: 100%;
   text-transform: capitalize;
 }
 

@@ -10,19 +10,19 @@ export default function Header({ currentScore, bestScore, level, bestLevel }) {
           className="pokeball"
         />
         <span>
-          <span class="poke">Poké</span>
+          <span className="poke">Poké</span>
           <span className="memo">Memo</span>
         </span>
       </h1>
       <div className="stats">
-        <div class="container">
+        <div className="container">
           <p className="current-score">Score: {currentScore}</p>
           <p className="best-score">Best Score: {bestScore}</p>
         </div>
 
         <div className="divider" />
 
-        <div class="container">
+        <div className="container">
           <p className="level">Level {level}</p>
           <p className="level">Best Level: {bestLevel}</p>
         </div>
