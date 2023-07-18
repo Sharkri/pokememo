@@ -15,10 +15,17 @@ export default function Header({ currentScore, bestScore, level, bestLevel }) {
         </span>
       </h1>
       <div className="stats">
-        <p className="current-score">Score: {currentScore}</p>|
-        <p className="best-score">Best Score: {bestScore}</p>|
-        <p className="level">Level {level}</p>|
-        <p className="level">Best Level Reached: {bestLevel}</p>
+        <div class="container">
+          <p className="current-score">Score: {currentScore}</p>
+          <p className="best-score">Best Score: {bestScore}</p>
+        </div>
+
+        <div className="divider" />
+
+        <div class="container">
+          <p className="level">Level {level}</p>
+          <p className="level">Best Level: {bestLevel}</p>
+        </div>
       </div>
     </header>
   );
