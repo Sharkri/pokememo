@@ -1,8 +1,8 @@
-# Flags Memory Card
+# PokeMemo
 
-[Live Preview](https://sharkri.github.io/memory-card/)
+[Live Preview](https://sharkri.github.io/pokememo/)
 
-![Memory Game Preview Gif](assets/memory-game.gif)
+![gif preview](https://github.com/Sharkri/pokememo/assets/95330865/af45dd22-f605-4703-bcd0-4934d5e3c5e7)
 
 ## Getting Started
 

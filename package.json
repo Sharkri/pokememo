@@ -1,6 +1,6 @@
 {
-  "homepage": "https://sharkri.github.io/memory-card",
-  "name": "memory-card",
+  "homepage": "https://sharkri.github.io/pokememo",
+  "name": "pokememo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
