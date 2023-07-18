@@ -3,7 +3,7 @@ import Tilt from "react-parallax-tilt";
 
 export default function Card({ image, name, onClick, showing }) {
   return (
-    <Tilt>
+    <Tilt tiltReverse reset>
       <div className={`card-container ${showing ? "front" : "back"}`}>
         <div className="card-inner">
           <div className="card-front">

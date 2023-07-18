@@ -15,6 +15,10 @@
   perspective: 1000px;
 }
 
+.card-container.back {
+  pointer-events: none;
+}
+
 .card-container.back .card-inner {
   transform: rotateY(180deg);
 }
