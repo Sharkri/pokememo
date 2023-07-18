@@ -22,8 +22,10 @@ function App() {
     async (amount) => {
       const pokemonsToShow = [];
       let tries = 0;
-      const shiny = Math.random() > 0.9;
 
+      const isFirstVisit = localStorage.getItem("visited") === null;
+      // increase odds if first visit
+      const shiny = Math.random() > (isFirstVisit ? 0.5 : 0.9);
       while (pokemonsToShow.length < amount && tries < 100) {
         const randomId = Math.floor(Math.random() * 1000);
 
@@ -59,15 +61,19 @@ function App() {
   const MIN_LOAD_TIME = 250;
 
   const [currentScore, setCurrentScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0);
+  const [bestScore, setBestScore] = useState(
+    localStorage.getItem("best-score") || 0
+  );
   const [cards, setCards] = useState(null);
   const [isGameOver, setIsGameOver] = useState(false);
   const [level, setLevel] = useState(1);
-  const [bestLevel, setBestLevel] = useState(0);
+  const [bestLevel, setBestLevel] = useState(
+    localStorage.getItem("best-level") || 0
+  );
   const [cardsShowing, setCardsShowing] = useState(false);
 
   useEffect(() => {
-    initializePokemons();
+    initializePokemons().then(() => localStorage.setItem("visited", true));
     document.title = "PokéMemo";
   }, [initializePokemons]);
 
@@ -88,14 +94,17 @@ function App() {
   function incrementScore() {
     const incrementedScore = currentScore + 1;
     setCurrentScore(incrementedScore);
-    // Check if current score exceeded best score
-    if (incrementedScore > bestScore) setBestScore(incrementedScore);
+    const newBestScore = Math.max(incrementedScore, bestScore);
+    setBestScore(newBestScore);
+
+    localStorage.setItem("best-score", newBestScore);
   }
 
   function handleLevelUp() {
-    const newLevel = level + 1;
-    setLevel(newLevel);
-    setBestLevel(Math.max(bestLevel, newLevel));
+    setLevel((prevLevel) => prevLevel + 1);
+    const newBestLevel = Math.max(bestLevel, level);
+    setBestLevel(newBestLevel);
+    localStorage.setItem("best-level", newBestLevel);
     // Add current card amount/length + increment step
     const pokemons = getRandomPokemons(cards.length + INCREMENT_STEP);
     setCards(null); // show loading screen
