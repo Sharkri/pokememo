@@ -7,7 +7,7 @@ import LoadingScreen from "./components/LoadingScreen";
 
 const getImageUrl = (id) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 function App() {
   const getPokemon = useCallback(async (id) => {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -31,15 +31,21 @@ function App() {
     [getPokemon]
   );
 
-  const initializePokemons = useCallback(() => {
+  const initializePokemons = useCallback(async () => {
     const pokemons = getRandomPokemons(INITIAL_CARD_AMOUNT);
+
     setCards(null);
-    setTimeout(async () => setCards(await pokemons), CARD_SLEEP_TIME);
+    await sleep(MIN_LOAD_TIME);
+    setCards(await pokemons);
+
+    await sleep(CARD_SLEEP_TIME);
+    setCardsShowing(true);
   }, [getRandomPokemons]);
 
   const INCREMENT_STEP = 2;
   const INITIAL_CARD_AMOUNT = 4;
-  const CARD_SLEEP_TIME = 580;
+  const CARD_SLEEP_TIME = 850;
+  const MIN_LOAD_TIME = 250;
 
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
@@ -47,7 +53,7 @@ function App() {
   const [isGameOver, setIsGameOver] = useState(false);
   const [level, setLevel] = useState(1);
   const [bestLevel, setBestLevel] = useState(0);
-  const [cardsShowing, setCardsShowing] = useState(true);
+  const [cardsShowing, setCardsShowing] = useState(false);
 
   useEffect(() => {
     initializePokemons();
@@ -142,12 +148,7 @@ function App() {
         bestLevel={bestLevel}
       />
 
-      <Main
-        cards={cards}
-        showing={cardsShowing}
-        onClick={handleCardClick}
-        show={cardsShowing}
-      />
+      <Main cards={cards} showing={cardsShowing} onClick={handleCardClick} />
     </div>
   );
 }
