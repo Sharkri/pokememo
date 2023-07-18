@@ -1,7 +1,7 @@
 import Card from "./Card";
 import "../styles/Main.css";
 
-export default function Main({ cards, onClick }) {
+export default function Main({ cards, onClick, showing }) {
   return (
     <main>
       <p className="game-instructions">
@@ -15,7 +15,8 @@ export default function Main({ cards, onClick }) {
             name={card.name}
             key={card.id}
             index={index}
-            onClick={onClick}
+            onClick={() => onClick(index)}
+            showing={showing}
           />
         ))}
       </div>

@@ -1,50 +1,61 @@
-import { useState } from "react";
-import "./styles/App.css";
+import { useCallback, useEffect, useState } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
-import countries from "./countries.json";
 import uniqid from "uniqid";
 import GameOverModal from "./components/GameOverModal";
+import LoadingScreen from "./components/LoadingScreen";
+
+const getImageUrl = (id) =>
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
 function App() {
-  const getRandomIndex = (array) => Math.floor(Math.random() * array.length);
+  const getPokemon = useCallback(async (id) => {
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    const { name } = await res.json();
+    return { name, image: getImageUrl(id), id };
+  }, []);
 
-  function getRandomCountries(countryAmount) {
-    // Clone countries to avoid modifying original array
-    const availableCountries = [...countries];
-    const randomCountries = [];
-    for (let i = 0; i < countryAmount; i++) {
-      // Get random index
-      const index = getRandomIndex(availableCountries);
-      const country = availableCountries[index];
-      const flag = require(`./images/${country.code.toLowerCase()}.png`);
-      randomCountries.push({
-        image: flag,
-        name: country.name,
-        isClicked: false,
-        id: uniqid(),
-      });
-      // Remove the country at index selected to avoid duplicates appearing
-      availableCountries.splice(index, 1);
-    }
+  const getRandomPokemons = useCallback(
+    async (amount) => {
+      const pokemonIds = [];
+      let tries = 0;
+      while (pokemonIds.length < amount && tries < 100) {
+        const randomId = Math.floor(Math.random() * 1000);
+        const isDuplicateId = pokemonIds.find((id) => id === randomId);
+        if (isDuplicateId) tries++;
+        else pokemonIds.push(randomId);
+      }
 
-    return randomCountries;
-  }
+      return await Promise.all(pokemonIds.map(getPokemon));
+    },
+    [getPokemon]
+  );
 
-  // How much to increment each level
+  const initializePokemons = useCallback(
+    () => getRandomPokemons(INITIAL_CARD_AMOUNT).then(setCards),
+    [getRandomPokemons]
+  );
+
   const INCREMENT_STEP = 2;
   const INITIAL_CARD_AMOUNT = 4;
+  const CARD_SLEEP_TIME = 600;
+
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  const [cards, setCards] = useState(getRandomCountries(INITIAL_CARD_AMOUNT));
+  const [cards, setCards] = useState(null);
   const [isGameOver, setIsGameOver] = useState(false);
   const [level, setLevel] = useState(1);
+  const [cardsShowing, setCardsShowing] = useState(true);
+
+  useEffect(() => {
+    initializePokemons();
+  }, [initializePokemons]);
 
   function shuffleCards() {
     const availableCards = [...cards];
     const shuffledCards = [];
     while (availableCards.length) {
-      const index = getRandomIndex(availableCards);
+      const index = Math.floor(Math.random() * availableCards.length);
       const card = availableCards[index];
       // Need to give a new key/uniqid for react to detect a rerender
       card.id = uniqid();
@@ -61,42 +72,54 @@ function App() {
     if (incrementedScore > bestScore) setBestScore(incrementedScore);
   }
 
-  function setIsClicked(index) {
+  function handleLevelUp() {
+    setLevel(level + 1);
+    // Add current card amount/length + increment step
+    const pokemons = getRandomPokemons(cards.length + INCREMENT_STEP);
+
+    setTimeout(async () => {
+      setCards(await pokemons);
+      setCardsShowing(true);
+    }, CARD_SLEEP_TIME);
+  }
+
+  function updateCardsClicked(index) {
     const newCards = [...cards];
     newCards[index].isClicked = true;
     setCards(newCards);
   }
 
-  function handleCardClick(e) {
-    const cardIndex = e.currentTarget.dataset.index;
+  async function handleCardClick(cardIndex) {
+    if (isGameOver) return;
+
     const card = cards[cardIndex];
     if (card.isClicked) {
       setIsGameOver(true);
       return;
     }
 
-    setIsClicked(cardIndex);
+    updateCardsClicked(cardIndex);
     incrementScore();
+    setCardsShowing(false);
 
     // check if every card has been clicked
-    if (cards.every((card) => card.isClicked)) {
-      // go to next level
-      setLevel(level + 1);
-      // Add current card amount/length + increment step
-      const newCountries = getRandomCountries(cards.length + INCREMENT_STEP);
-      setCards(newCountries);
-      return;
+    if (cards.every((card) => card.isClicked)) handleLevelUp();
+    else {
+      setTimeout(() => {
+        setCardsShowing(true);
+        shuffleCards();
+      }, CARD_SLEEP_TIME);
     }
-
-    shuffleCards();
   }
 
   function playAgain() {
     setIsGameOver(false);
     setCurrentScore(0);
-    setCards(getRandomCountries(INITIAL_CARD_AMOUNT));
+    initializePokemons();
     setLevel(1);
   }
+
+  if (cards == null) return <LoadingScreen />;
 
   return (
     <div className="App">
@@ -108,7 +131,13 @@ function App() {
         />
       )}
       <Header currentScore={currentScore} bestScore={bestScore} level={level} />
-      <Main cards={cards} onClick={handleCardClick} />
+
+      <Main
+        cards={cards}
+        showing={cardsShowing}
+        onClick={handleCardClick}
+        show={cardsShowing}
+      />
     </div>
   );
 }

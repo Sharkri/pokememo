@@ -1,15 +1,13 @@
 import "../styles/Card.css";
+import Tilt from "react-parallax-tilt";
 
-export default function Card({ image, name, onClick, index }) {
+export default function Card({ image, name, onClick, showing }) {
   return (
-    <button className="card" onClick={onClick} data-index={index}>
-      <img
-        src={image}
-        alt={`Flag of ${name}`}
-        className="flag"
-        draggable="false"
-      />
-      <p className="card-name">{name}</p>
-    </button>
+    <Tilt>
+      <button className={`card ${showing ? "" : "hide"}`} onClick={onClick}>
+        <img src={image} alt={name} className="card-image" draggable="false" />
+        <p className="card-name">{name}</p>
+      </button>
+    </Tilt>
   );
 }
