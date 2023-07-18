@@ -65,3 +65,7 @@
     transform: rotateY(0deg);
   }
 }
+
+.card:active {
+  scale: 0.95;
+}
