@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/pokememo/static/css/main.49cbc60e.css",
-    "main.js": "/pokememo/static/js/main.3a7781eb.js",
+    "main.css": "/pokememo/static/css/main.3632d118.css",
+    "main.js": "/pokememo/static/js/main.8de948ba.js",
     "index.html": "/pokememo/index.html",
-    "main.49cbc60e.css.map": "/pokememo/static/css/main.49cbc60e.css.map",
-    "main.3a7781eb.js.map": "/pokememo/static/js/main.3a7781eb.js.map"
+    "main.3632d118.css.map": "/pokememo/static/css/main.3632d118.css.map",
+    "main.8de948ba.js.map": "/pokememo/static/js/main.8de948ba.js.map"
   },
   "entrypoints": [
-    "static/css/main.49cbc60e.css",
-    "static/js/main.3a7781eb.js"
+    "static/css/main.3632d118.css",
+    "static/js/main.8de948ba.js"
   ]
 }
