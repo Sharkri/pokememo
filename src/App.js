@@ -8,8 +8,8 @@ import levelUpSound from "./assets/levelup.mp3";
 import clickSound from "./assets/click.mp3";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const levelUpAudio = new Audio(levelUpSound);
-const clickAudio = new Audio(clickSound);
+const levelUpAudio = new Audio(levelUpSound, { volume: 0.5 });
+const clickAudio = new Audio(clickSound, { volume: 0.5 });
 
 function App() {
   const initializePokemons = async () => {
@@ -89,9 +89,6 @@ function App() {
       return;
     }
 
-    if (!clickAudio.paused) clickAudio.currentTime = 0;
-    clickAudio.play();
-
     updateCardsClicked(cardIndex);
     incrementScore();
     setCardsShowing(false);
@@ -99,6 +96,9 @@ function App() {
     // check if every card has been clicked
     if (pokemons.every((card) => card.isClicked)) handleLevelUp();
     else {
+      if (!clickAudio.paused) clickAudio.currentTime = 0;
+      clickAudio.play();
+
       setTimeout(() => {
         setCardsShowing(true);
         shufflePokemons();
