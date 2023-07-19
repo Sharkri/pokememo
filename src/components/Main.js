@@ -1,7 +1,7 @@
 import Card from "./Card";
 import "../styles/Main.css";
 
-export default function Main({ cards, onClick, showing }) {
+export default function Main({ cards, onClick, cardsShowing }) {
   return (
     <main>
       <div className="cards">
@@ -10,7 +10,7 @@ export default function Main({ cards, onClick, showing }) {
             card={card}
             key={card.id}
             onClick={() => onClick(index)}
-            showing={showing}
+            cardsShowing={cardsShowing}
           />
         ))}
       </div>

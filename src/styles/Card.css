@@ -15,10 +15,6 @@
   perspective: 1000px;
 }
 
-.card-container.back {
-  pointer-events: none;
-}
-
 .card-container.back .card-inner {
   transform: rotateY(180deg);
 }
@@ -71,6 +67,7 @@
 @keyframes flip-card {
   from {
     transform: rotateY(180deg);
+    pointer-events: none;
   }
   to {
     transform: rotateY(0deg);

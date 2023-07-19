@@ -20,7 +20,7 @@ function App() {
 
   const INCREMENT_STEP = 2;
   const INITIAL_CARD_AMOUNT = 4;
-  const CARD_SLEEP_TIME = 850;
+  const CARD_SLEEP_TIME = 800;
   const MIN_LOAD_TIME = 250;
 
   const [currentScore, setCurrentScore] = useState(0);
@@ -120,7 +120,11 @@ function App() {
         bestLevel={bestLevel}
       />
 
-      <Main cards={pokemons} showing={cardsShowing} onClick={handleCardClick} />
+      <Main
+        cards={pokemons}
+        cardsShowing={cardsShowing}
+        onClick={handleCardClick}
+      />
     </div>
   );
 }

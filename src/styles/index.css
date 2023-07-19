@@ -23,6 +23,10 @@ body {
   background-color: var(--main-bg-color);
 }
 
+.pointer-events-none {
+  pointer-events: none;
+}
+
 .App,
 #root {
   height: 100%;
