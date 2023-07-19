@@ -4,8 +4,13 @@ import Main from "./components/Main";
 import GameOverModal from "./components/GameOverModal";
 import LoadingScreen from "./components/LoadingScreen";
 import usePokemons from "./usePokemons";
+import levelUpSound from "./assets/levelup.mp3";
+import clickSound from "./assets/click.mp3";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const levelUpAudio = new Audio(levelUpSound);
+const clickAudio = new Audio(clickSound);
+
 function App() {
   const initializePokemons = async () => {
     const randomPkmns = getRandomPokemons(INITIAL_CARD_AMOUNT);
@@ -53,6 +58,8 @@ function App() {
   }
 
   function handleLevelUp() {
+    levelUpAudio.play();
+
     setLevel((prevLevel) => prevLevel + 1);
     const newBestLevel = Math.max(bestLevel, level);
     setBestLevel(newBestLevel);
@@ -60,6 +67,7 @@ function App() {
     // Add current card amount/length + increment step
     const randomPkmns = getRandomPokemons(pokemons.length + INCREMENT_STEP);
     setPokemons(null); // show loading screen
+
     setTimeout(async () => {
       setPokemons(await randomPkmns);
       setCardsShowing(true);
@@ -80,6 +88,9 @@ function App() {
       setIsGameOver(true);
       return;
     }
+
+    if (!clickAudio.paused) clickAudio.currentTime = 0;
+    clickAudio.play();
 
     updateCardsClicked(cardIndex);
     incrementScore();
