@@ -7,9 +7,7 @@ export default function Card({ card, onClick, cardsShowing }) {
   const [interactable, setInteractable] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setInteractable(true);
-    }, ANIMATION_TIME);
+    setTimeout(() => setInteractable(true), ANIMATION_TIME);
   }, []);
 
   return (

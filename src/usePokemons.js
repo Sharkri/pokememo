@@ -22,7 +22,7 @@ export default function usePokemons() {
     const isFirstVisit = localStorage.getItem("visited") === null;
     const shiny = Math.random() > (isFirstVisit ? 0.5 : 0.9);
     while (pokemonsToShow.length < amount && tries < 100) {
-      const randomId = Math.floor(Math.random() * 1000);
+      const randomId = Math.floor(Math.random() * 1000) + 1;
 
       const isDuplicateId = pokemonsToShow.find(({ id }) => id === randomId);
       if (isDuplicateId) tries++;
