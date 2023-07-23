@@ -2,7 +2,7 @@
 
 [Live Preview](https://sharkri.github.io/pokememo/)
 
-![gif preview](https://github.com/Sharkri/pokememo/assets/95330865/af45dd22-f605-4703-bcd0-4934d5e3c5e7)
+https://github.com/Sharkri/pokememo/assets/95330865/00820505-c9d3-44b2-a687-7843e2e58c1f
 
 ## Getting Started
 
