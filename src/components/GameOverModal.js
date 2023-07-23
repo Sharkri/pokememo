@@ -5,7 +5,7 @@ import OptionButton from "./OptionButton";
 export default function GameOverModal({ score, level, onPlayAgain, onQuit }) {
   return (
     <Modal>
-      <div class="game-over-modal-content modal-content">
+      <div className="game-over-modal-content modal-content">
         <h2>Game Over!</h2>
         <div className="final-stats">
           <span className="final-score">
