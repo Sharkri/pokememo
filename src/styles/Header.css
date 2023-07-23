@@ -1,9 +1,8 @@
-header {
+.header {
   padding: 12px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin-bottom: 16px;
+  flex-direction: column;
 }
 
 .logo-button {

@@ -1,27 +1,18 @@
 import "../styles/Score.css";
 
-export default function Score({ currentScore, bestScore, level, bestLevel }) {
+export default function Score({ currentScore, bestScore, level }) {
   return (
     <div className="stats">
-      <div className="container">
-        <p className="current-score">
-          Score: <b>{currentScore}</b>
-        </p>
-        <p className="level">
-          Level <b>{level}</b>
-        </p>
-      </div>
-
-      <div className="divider" />
-
-      <div className="container">
-        <p className="best-score">
-          Best Score: <b>{bestScore}</b>
-        </p>
-        <p className="level">
-          Best Level: <b>{bestLevel}</b>
-        </p>
-      </div>
+      <p className="current-score">
+        Score: <b>{currentScore}</b>
+      </p>
+      <p className="best-score">
+        High Score:{" "}
+        <span>
+          <i className="nes-icon trophy is-small" />
+          <b>{bestScore}</b>
+        </span>
+      </p>
     </div>
   );
 }

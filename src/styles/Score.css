@@ -1,20 +1,19 @@
 .stats {
+  text-transform: uppercase;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 16px;
-  text-align: center;
-  font-size: 18px;
-  margin-top: 8px;
+  gap: 24px;
+  color: rgb(41, 39, 39);
 }
 
-.stats .divider {
-  border-left: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.stats .container {
+.stats .best-score {
   display: flex;
-  flex-direction: column;
+  white-space: pre-wrap;
+}
+
+.stats .best-score span {
+  display: flex;
   gap: 8px;
-  color: black;
+  align-items: center;
 }

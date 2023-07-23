@@ -40,9 +40,6 @@ function App() {
   );
   const [isGameOver, setIsGameOver] = useState(false);
   const [level, setLevel] = useState(1);
-  const [bestLevel, setBestLevel] = useState(
-    localStorage.getItem("best-level") || 0
-  );
   const [cardsShowing, setCardsShowing] = useState(false);
   const [startScreen, setStartScreen] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -64,9 +61,6 @@ function App() {
     levelUpAudio.play();
 
     setLevel((prevLevel) => prevLevel + 1);
-    const newBestLevel = Math.max(bestLevel, level);
-    setBestLevel(newBestLevel);
-    localStorage.setItem("best-level", newBestLevel);
     // Add current card amount/length + increment step
     const randomPkmns = getRandomPokemons(pokemons.length + INCREMENT_STEP);
     setLoading(true);
@@ -149,7 +143,6 @@ function App() {
               currentScore={currentScore}
               bestScore={bestScore}
               level={level}
-              bestLevel={bestLevel}
             />
           </Header>
 
