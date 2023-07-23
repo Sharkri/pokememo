@@ -2,19 +2,16 @@ import { useState } from "react";
 import uniqid from "uniqid";
 
 export default function usePokemons() {
-  const [pokemons, setPokemons] = useState(null);
+  const [pokemons, setPokemons] = useState([]);
+  const POSSIBLE_POKEMONS = 721;
 
   const getPokemon = async ({ id, shiny }) => {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const { name, sprites } = await res.json();
-    const image =
-      sprites.other["official-artwork"][
-        shiny ? "front_shiny" : "front_default"
-      ];
-
+    const image = sprites[shiny ? "front_shiny" : "front_default"];
+    console.log(sprites);
     return { name, image, id, shiny };
   };
-
   const getRandomPokemons = async (amount) => {
     const pokemonsToShow = [];
     let tries = 0;
@@ -22,7 +19,7 @@ export default function usePokemons() {
     const isFirstVisit = localStorage.getItem("visited") === null;
     const shiny = Math.random() > (isFirstVisit ? 0.5 : 0.9);
     while (pokemonsToShow.length < amount && tries < 100) {
-      const randomId = Math.floor(Math.random() * 1000) + 1;
+      const randomId = Math.floor(Math.random() * POSSIBLE_POKEMONS) + 1;
 
       const isDuplicateId = pokemonsToShow.find(({ id }) => id === randomId);
       if (isDuplicateId) tries++;

@@ -26,6 +26,8 @@ export default function Card({ card, onClick, cardsShowing }) {
         <div className="card-inner">
           <div className="card-front">
             <button className="card" data-shiny={card.shiny} onClick={onClick}>
+              {card.shiny && <div className="shiny-symbol" />}
+
               <img
                 src={card.image}
                 alt={card.name}
@@ -33,9 +35,7 @@ export default function Card({ card, onClick, cardsShowing }) {
                 draggable="false"
               />
               <p className="card-name">
-                <span className="sparkles">{card.shiny && "✨ "}</span>
                 <span className="name">{card.name}</span>
-                <span className="sparkles">{card.shiny && " ✨"}</span>
               </p>
             </button>
           </div>

@@ -11,6 +11,7 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 100;
   animation: fade-in 0.35s;
+  font-family: Pokemon;
 }
 
 .game-over-content {
@@ -18,52 +19,85 @@
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-  gap: 18px;
-  background-color: var(--lighter-bg-color);
-  border-radius: 12px;
-  width: 85%;
-  max-width: 325px;
-  padding: 24px;
+  background-color: #f8f3f8;
+  color: #181010;
+  width: 97%;
+  max-width: 450px;
+  padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   animation: fade-in 0.35s, scale-up 0.35s;
+  border-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAMAAAAPdrEwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAABgQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMM8PuMAAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4xLjVkR1hSAAAA5UlEQVRoQ+3MQQrDMBBD0fb+h06N/2A+MTHdTtBbKRpHn0u+UtUf6oepqinTQ1VT62kfyNgbuHcGTaYXmqbT9XXEU6vDUaZvWk/XHxtfn/KOa6YXrk2n/UGGG7K5J8NNpgc3rafBAW7I5p4MGmR6oMFrpvf8xG+ckemV0XraB+czv3RGpldG62n47PzEb5yR6ZXxmmm4IZt7MmiQ6YEGrad9IGNv4N4ZNJleaJpO19cRT60OR5m+aT1df2x8fco7rpleuDad9gcZbsjmngw3mR7ctJ4GB1T1h/phqmrK9FDV1HH6un4ss9jsFZtJkQAAAABJRU5ErkJggg==")
+    42 round;
+  border-width: 20px;
+  border-style: solid;
 }
 
 .final-stats {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 1.1rem;
+  gap: 12px;
+  margin: 24px 0;
+  letter-spacing: -0.07em;
+  font-size: 15px;
 }
 
+.level-number,
 .final-score-number {
-  color: rgba(188, 255, 152, 0.88);
   font-weight: bold;
 }
 
-.level-reached .level-number {
-  color: #facc15;
-  font-weight: bold;
+.level-number {
+  color: darkgoldenrod;
 }
 
-.play-again {
-  border: none;
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-size: 1.4rem;
-  background-color: #262626;
-  transition: 0.2s;
-  color: rgb(200, 200, 200);
-  font-weight: bold;
+.options {
+  display: flex;
+  flex-direction: column;
+  margin-top: 18px;
 }
 
-.play-again:hover {
-  color: rgb(221, 221, 221);
-  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
-  transform: translateY(-3px);
+.options button {
+  padding-left: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background-color: transparent;
+  border: 0;
+  position: relative;
+  text-align: left;
+  text-transform: uppercase;
+  font-family: Pokemon;
+  border: 0;
+  outline: 0;
 }
 
-.play-again:active {
-  scale: 0.95;
+.options button:focus {
+  outline: 0;
+}
+
+.options button:focus-visible {
+  outline: 1px solid black;
+}
+
+.options button:active {
+  scale: 0.97;
+  outline: 0;
+}
+
+.options button:hover::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: -2px;
+  width: 2px;
+  height: 2px;
+  font-size: 2px;
+  color: #181010;
+  box-shadow: 1em 0em 0 #181010, 2em 0em 0 #181010, 1em 1em 0 #181010,
+    2em 1em 0 #181010, 3em 1em 0 #181010, 1em 2em 0 #181010, 2em 2em 0 #181010,
+    3em 2em 0 #181010, 4em 2em 0 #181010, 1em 3em 0 #181010, 2em 3em 0 #181010,
+    3em 3em 0 #181010, 4em 3em 0 #181010, 5em 3em 0 #181010, 1em 4em 0 #181010,
+    2em 4em 0 #181010, 3em 4em 0 #181010, 4em 4em 0 #181010, 1em 5em 0 #181010,
+    2em 5em 0 #181010, 3em 5em 0 #181010, 1em 6em 0 #181010, 2em 6em 0 #181010;
 }
 
 @keyframes fade-in {

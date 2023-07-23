@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
 @font-face {
-  font-family: Retro;
-  src: url("../assets/Retro.ttf");
+  font-family: Pokemon;
+  src: url("../assets/Pokemon\ GB.ttf");
 }
 
 * {
@@ -12,23 +14,19 @@
 html,
 body {
   height: 100%;
-}
-
-body {
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  --main-bg-color: rgb(34, 39, 46);
-  --lighter-bg-color: rgb(45, 51, 59);
-  --text-color: rgb(212, 216, 221);
-  background-color: var(--main-bg-color);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: var(--text-color);
+  background: url("../assets/pokemon-bg.png") no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Press Start 2P";
 }
 
 button {
-  color: var(--text-color);
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+button:focus-visible {
+  outline: 1px solid skyblue;
 }
 
 .pointer-events-none {
@@ -38,12 +36,6 @@ button {
 .App,
 #root {
   height: 100%;
-}
-
-button {
-  cursor: pointer;
-}
-
-button:focus-visible {
-  outline: 1px solid skyblue;
+  display: flex;
+  flex-direction: column;
 }

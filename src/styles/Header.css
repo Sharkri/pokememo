@@ -1,5 +1,4 @@
 header {
-  background-color: var(--lighter-bg-color);
   padding: 12px;
   display: flex;
   flex-direction: column;
@@ -12,7 +11,8 @@ header h1 {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: Retro;
+  font-size: 26px;
+  letter-spacing: -0.03em;
 }
 
 header .pokeball {
@@ -26,36 +26,4 @@ header .poke {
 
 header .memo {
   color: white;
-}
-
-.stats {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  text-align: center;
-  font-size: 18px;
-  margin-top: 8px;
-}
-
-.stats .divider {
-  border-left: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.stats .container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.current-score {
-  color: rgba(188, 255, 152, 0.88);
-}
-
-.best-score {
-  color: rgba(255, 152, 152, 0.88);
-}
-
-.level {
-  color: #facc15;
 }

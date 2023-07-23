@@ -1,0 +1,20 @@
+.stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 8px;
+}
+
+.stats .divider {
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.stats .container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: black;
+}

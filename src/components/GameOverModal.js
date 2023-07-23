@@ -1,6 +1,15 @@
 import "../styles/GameOverModal.css";
+import pokemonAButtonSound from "../assets/pokemon-a-button.mp3";
 
-export default function GameOverModal({ score, level, onPlayAgain }) {
+const pokemonAButtonAudio = new Audio(pokemonAButtonSound);
+pokemonAButtonAudio.volume = 0.5;
+
+export default function GameOverModal({ score, level, onPlayAgain, onQuit }) {
+  const onAction = async (cb) => {
+    pokemonAButtonAudio.play();
+    setTimeout(cb, 200);
+  };
+
   return (
     <div className="game-over-modal">
       <div className="game-over-content">
@@ -11,12 +20,14 @@ export default function GameOverModal({ score, level, onPlayAgain }) {
             <span className="final-score-number">{score}</span>
           </span>
           <span className="level-reached">
-            Level Reached: <span className="level-number">Level {level}</span>
+            You reached <span className="level-number">Level {level}</span>
           </span>
         </div>
-        <button className="play-again" onClick={onPlayAgain}>
-          Play again
-        </button>
+
+        <div class="options">
+          <button onMouseDown={() => onAction(onPlayAgain)}>Play again</button>
+          <button onMouseDown={() => onAction(onQuit)}>Quit</button>
+        </div>
       </div>
     </div>
   );

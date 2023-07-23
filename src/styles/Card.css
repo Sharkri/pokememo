@@ -6,9 +6,21 @@
 
 .card {
   border-radius: 5px;
-  border: transparent;
-  background-color: rgba(45, 51, 59, 0.5);
-  border: 4px solid var(--lighter-bg-color);
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 0;
+}
+
+.card:focus {
+  outline: 0;
+}
+
+.card:focus-visible {
+  outline: 1px solid black;
+}
+
+.card:active {
+  scale: 0.95;
+  outline: 0;
 }
 
 .card-container {
@@ -41,20 +53,27 @@
   width: 100%;
   height: 200px;
   object-fit: contain;
+  user-select: none;
 }
 
 .card[data-shiny="true"] .card-name .name {
-  background: linear-gradient(120deg, #8c97ff, #90ffb1);
+  background: linear-gradient(120deg, gold 0%, lightyellow 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.sparkles {
-  color: #f1b818;
+.shiny-symbol {
+  position: absolute;
+  top: 6px;
+  left: 2px;
+  width: 32px;
+  height: 32px;
+  background: url("../assets/sparkle.webp");
 }
 
 .card-name {
+  letter-spacing: -0.02em;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -62,7 +81,7 @@
   font-weight: bold;
   max-width: 100%;
   text-transform: capitalize;
-  font-size: 16px;
+  color: white;
 }
 @keyframes flip-card {
   from {
@@ -72,8 +91,4 @@
   to {
     transform: rotateY(0deg);
   }
-}
-
-.card:active {
-  scale: 0.95;
 }

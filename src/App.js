@@ -5,19 +5,22 @@ import GameOverModal from "./components/GameOverModal";
 import LoadingScreen from "./components/LoadingScreen";
 import usePokemons from "./usePokemons";
 import levelUpSound from "./assets/levelup.mp3";
-import clickSound from "./assets/click.mp3";
+import StartScreen from "./components/StartScreen";
+import "nes.css/css/nes.min.css";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const levelUpAudio = new Audio(levelUpSound, { volume: 0.5 });
-const clickAudio = new Audio(clickSound, { volume: 0.5 });
 
 function App() {
   const initializePokemons = async () => {
     const randomPkmns = getRandomPokemons(INITIAL_CARD_AMOUNT);
-    setPokemons(null);
+
+    setLoading(true);
 
     await sleep(MIN_LOAD_TIME);
+
     setPokemons(await randomPkmns);
+    setLoading(false);
 
     await sleep(CARD_SLEEP_TIME);
     setCardsShowing(true);
@@ -28,24 +31,23 @@ function App() {
   const CARD_SLEEP_TIME = 800;
   const MIN_LOAD_TIME = 250;
 
+  const { pokemons, shufflePokemons, setPokemons, getRandomPokemons } =
+    usePokemons();
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(
     localStorage.getItem("best-score") || 0
   );
-
-  const { pokemons, shufflePokemons, setPokemons, getRandomPokemons } =
-    usePokemons();
   const [isGameOver, setIsGameOver] = useState(false);
   const [level, setLevel] = useState(1);
   const [bestLevel, setBestLevel] = useState(
     localStorage.getItem("best-level") || 0
   );
   const [cardsShowing, setCardsShowing] = useState(false);
+  const [startScreen, setStartScreen] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    initializePokemons().then(() => localStorage.setItem("visited", true));
-    document.title = "PokéMemo";
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    localStorage.setItem("visited", true);
   }, []);
 
   function incrementScore() {
@@ -66,11 +68,12 @@ function App() {
     localStorage.setItem("best-level", newBestLevel);
     // Add current card amount/length + increment step
     const randomPkmns = getRandomPokemons(pokemons.length + INCREMENT_STEP);
-    setPokemons(null); // show loading screen
+    setLoading(true);
 
     setTimeout(async () => {
       setPokemons(await randomPkmns);
       setCardsShowing(true);
+      setLoading(false);
     }, CARD_SLEEP_TIME);
   }
 
@@ -96,9 +99,6 @@ function App() {
     // check if every card has been clicked
     if (pokemons.every((card) => card.isClicked)) handleLevelUp();
     else {
-      if (!clickAudio.paused) clickAudio.currentTime = 0;
-      clickAudio.play();
-
       setTimeout(() => {
         setCardsShowing(true);
         shufflePokemons();
@@ -106,36 +106,57 @@ function App() {
     }
   }
 
-  function playAgain() {
-    setIsGameOver(false);
+  function resetScores() {
     setCurrentScore(0);
-    initializePokemons();
     setLevel(1);
   }
+  function playAgain() {
+    setIsGameOver(false);
+    resetScores();
+    initializePokemons();
+  }
 
-  if (pokemons == null) return <LoadingScreen next={level} />;
+  function handleQuit() {
+    setIsGameOver(false);
+    resetScores();
+    setStartScreen(true);
+  }
+
+  if (loading) return <LoadingScreen next={level} />;
 
   return (
     <div className="App">
-      {isGameOver && (
-        <GameOverModal
-          score={currentScore}
-          level={level}
-          onPlayAgain={playAgain}
+      {startScreen ? (
+        <StartScreen
+          onStart={() => {
+            setStartScreen(false);
+            initializePokemons();
+          }}
         />
-      )}
-      <Header
-        currentScore={currentScore}
-        bestScore={bestScore}
-        level={level}
-        bestLevel={bestLevel}
-      />
+      ) : (
+        <>
+          {isGameOver && (
+            <GameOverModal
+              score={currentScore}
+              level={level}
+              onPlayAgain={playAgain}
+              onQuit={handleQuit}
+            />
+          )}
+          <Header
+            currentScore={currentScore}
+            bestScore={bestScore}
+            level={level}
+            bestLevel={bestLevel}
+          />
 
-      <Main
-        cards={pokemons}
-        cardsShowing={cardsShowing}
-        onClick={handleCardClick}
-      />
+          <Main
+            cards={pokemons}
+            cardsShowing={cardsShowing}
+            onClick={handleCardClick}
+          />
+        </>
+      )}
     </div>
   );
 }
