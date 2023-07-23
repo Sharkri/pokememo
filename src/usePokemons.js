@@ -9,7 +9,6 @@ export default function usePokemons() {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const { name, sprites } = await res.json();
     const image = sprites[shiny ? "front_shiny" : "front_default"];
-    console.log(sprites);
     return { name, image, id, shiny };
   };
   const getRandomPokemons = async (amount) => {

@@ -1,0 +1,42 @@
+.option-button {
+  padding-left: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background-color: transparent;
+  border: 0;
+  position: relative;
+  text-align: left;
+  text-transform: uppercase;
+  font-family: Pokemon;
+  border: 0;
+}
+
+.option-button:focus {
+  outline: 0;
+}
+
+.option-button:focus-visible {
+  outline: 1px solid black;
+}
+
+.option-button:active {
+  scale: 0.97;
+  outline: 0;
+}
+
+.option-button:hover::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: -2px;
+  width: 2px;
+  height: 2px;
+  font-size: 2px;
+  color: #181010;
+  box-shadow: 1em 0em 0 #181010, 2em 0em 0 #181010, 1em 1em 0 #181010,
+    2em 1em 0 #181010, 3em 1em 0 #181010, 1em 2em 0 #181010, 2em 2em 0 #181010,
+    3em 2em 0 #181010, 4em 2em 0 #181010, 1em 3em 0 #181010, 2em 3em 0 #181010,
+    3em 3em 0 #181010, 4em 3em 0 #181010, 5em 3em 0 #181010, 1em 4em 0 #181010,
+    2em 4em 0 #181010, 3em 4em 0 #181010, 4em 4em 0 #181010, 1em 5em 0 #181010,
+    2em 5em 0 #181010, 3em 5em 0 #181010, 1em 6em 0 #181010, 2em 6em 0 #181010;
+}

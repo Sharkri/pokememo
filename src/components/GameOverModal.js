@@ -1,17 +1,11 @@
 import "../styles/GameOverModal.css";
-import pokemonAButtonSound from "../assets/pokemon-a-button.mp3";
-
-const pokemonAButtonAudio = new Audio(pokemonAButtonSound, { volume: 0.5 });
+import Modal from "./Modal";
+import OptionButton from "./OptionButton";
 
 export default function GameOverModal({ score, level, onPlayAgain, onQuit }) {
-  const onAction = async (cb) => {
-    pokemonAButtonAudio.play();
-    cb();
-  };
-
   return (
-    <div className="game-over-modal">
-      <div className="game-over-content">
+    <Modal>
+      <div class="game-over-modal-content modal-content">
         <h2>Game Over!</h2>
         <div className="final-stats">
           <span className="final-score">
@@ -22,12 +16,11 @@ export default function GameOverModal({ score, level, onPlayAgain, onQuit }) {
             You reached <span className="level-number">Level {level}</span>
           </span>
         </div>
-
-        <div class="options">
-          <button onClick={() => onAction(onPlayAgain)}>Play again</button>
-          <button onClick={() => onAction(onQuit)}>Quit</button>
+        <div className="options">
+          <OptionButton onClick={onPlayAgain}>Play again</OptionButton>
+          <OptionButton onClick={onQuit}>Quit</OptionButton>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }

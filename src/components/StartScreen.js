@@ -1,24 +1,23 @@
-import startUpSound from "../assets/startup.mp3";
-import Header from "./Header";
 import "../styles/StartScreen.css";
-
-const startupAudio = new Audio(startUpSound, { volume: 0.5 });
+import Modal from "./Modal";
+import OptionButton from "./OptionButton";
 
 export default function StartScreen({ onStart }) {
   return (
-    <div className="start-screen">
-      <Header />
-
-      <button
-        onClick={() => {
-          startupAudio.play();
-          onStart();
-        }}
-        className="nes-btn is-primary"
-        type="button"
-      >
-        Start Game
-      </button>
-    </div>
+    <Modal>
+      <div class="start-screen-modal-content modal-content">
+        <p>What would you like to do?</p>
+        <div className="options">
+          <OptionButton onClick={onStart}>Start Game</OptionButton>
+          <OptionButton
+            onClick={() =>
+              window.open("https://github.com/Sharkri/pokememo", "_blank")
+            }
+          >
+            Github Repo
+          </OptionButton>
+        </div>
+      </div>
+    </Modal>
   );
 }

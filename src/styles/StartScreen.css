@@ -1,0 +1,9 @@
+.start-screen-modal-content {
+  padding: 16px;
+}
+
+.github-repo:hover,
+.github-repo {
+  color: inherit;
+  text-decoration: none;
+}
