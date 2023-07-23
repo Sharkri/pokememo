@@ -13,7 +13,7 @@
   border-right: 0.15em solid black; /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  animation: typing 1.25s steps(70, end), blink-caret 0.75s step-end infinite;
+  animation: typing 1.25s steps(65, end), blink-caret 0.75s step-end infinite;
 }
 
 .start-options {
@@ -37,6 +37,7 @@
   from {
     width: 0;
   }
+
   to {
     width: 100%;
   }

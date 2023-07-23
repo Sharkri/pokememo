@@ -11,12 +11,9 @@
   border: 0;
 }
 
-.option-button:focus {
-  outline: 0;
-}
-
 .option-button:focus-visible {
-  outline: 1px solid black;
+  border: 0;
+  outline: 0;
 }
 
 .option-button:active {
@@ -24,7 +21,8 @@
   outline: 0;
 }
 
-.option-button:hover::before {
+.option-button:hover::before,
+.option-button:focus::before {
   content: "";
   position: absolute;
   top: 6px;
