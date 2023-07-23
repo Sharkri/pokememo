@@ -8,9 +8,11 @@ import levelUpSound from "./assets/levelup.mp3";
 import StartScreen from "./components/StartScreen";
 import "nes.css/css/nes.min.css";
 import Score from "./components/Score";
+import flipCardSound from "./assets/flip.mp3";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const levelUpAudio = new Audio(levelUpSound, { volume: 0.5 });
+const levelUpAudio = new Audio(levelUpSound, { volume: 0.2 });
+const flipCardAudio = new Audio(flipCardSound);
 
 function App() {
   const initializePokemons = async () => {
@@ -94,6 +96,8 @@ function App() {
     // check if every card has been clicked
     if (pokemons.every((card) => card.isClicked)) handleLevelUp();
     else {
+      flipCardAudio.currentTime = 0;
+      flipCardAudio.play();
       setTimeout(() => {
         setCardsShowing(true);
         shufflePokemons();
