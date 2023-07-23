@@ -6,18 +6,32 @@ header {
   margin-bottom: 16px;
 }
 
-header h1 {
+.logo-button {
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 26px;
+  font-size: 24px;
   letter-spacing: -0.03em;
+  border: 0;
+  background-color: transparent;
+}
+
+.logo-button:focus {
+  outline: 0;
+}
+
+.logo-button:focus-visible {
+  outline: 1px solid black;
+}
+
+.logo-button:active {
+  scale: 0.95;
+  outline: 0;
 }
 
 header .pokeball {
-  width: 42px;
-  height: 42px;
+  margin-bottom: 4px;
 }
 
 header .poke {

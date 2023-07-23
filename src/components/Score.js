@@ -7,16 +7,16 @@ export default function Score({ currentScore, bestScore, level, bestLevel }) {
         <p className="current-score">
           Score: <b>{currentScore}</b>
         </p>
-        <p className="best-score">
-          Best Score: <b>{bestScore}</b>
+        <p className="level">
+          Level <b>{level}</b>
         </p>
       </div>
 
       <div className="divider" />
 
       <div className="container">
-        <p className="level">
-          Level <b>{level}</b>
+        <p className="best-score">
+          Best Score: <b>{bestScore}</b>
         </p>
         <p className="level">
           Best Level: <b>{bestLevel}</b>

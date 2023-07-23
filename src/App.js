@@ -7,6 +7,7 @@ import usePokemons from "./usePokemons";
 import levelUpSound from "./assets/levelup.mp3";
 import StartScreen from "./components/StartScreen";
 import "nes.css/css/nes.min.css";
+import Score from "./components/Score";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const levelUpAudio = new Audio(levelUpSound, { volume: 0.5 });
@@ -143,12 +144,14 @@ function App() {
               onQuit={handleQuit}
             />
           )}
-          <Header
-            currentScore={currentScore}
-            bestScore={bestScore}
-            level={level}
-            bestLevel={bestLevel}
-          />
+          <Header onQuit={handleQuit}>
+            <Score
+              currentScore={currentScore}
+              bestScore={bestScore}
+              level={level}
+              bestLevel={bestLevel}
+            />
+          </Header>
 
           <Main
             cards={pokemons}
