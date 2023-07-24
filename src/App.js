@@ -9,10 +9,14 @@ import StartScreen from "./components/StartScreen";
 import "nes.css/css/nes.min.css";
 import Score from "./components/Score";
 import flipCardSound from "./assets/flip.mp3";
+import BGMToggle from "./components/BGMToggle";
+import playAudio from "./playAudio";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const levelUpAudio = new Audio(levelUpSound, { volume: 0.2 });
+const levelUpAudio = new Audio(levelUpSound);
+levelUpAudio.volume = 0.3;
 const flipCardAudio = new Audio(flipCardSound);
+flipCardAudio.volume = 0.4;
 
 function App() {
   const initializePokemons = async () => {
@@ -60,7 +64,7 @@ function App() {
   }
 
   function handleLevelUp() {
-    levelUpAudio.play();
+    playAudio(levelUpAudio);
 
     setLevel((prevLevel) => prevLevel + 1);
     // Add current card amount/length + increment step
@@ -96,8 +100,7 @@ function App() {
     // check if every card has been clicked
     if (pokemons.every((card) => card.isClicked)) handleLevelUp();
     else {
-      flipCardAudio.currentTime = 0;
-      flipCardAudio.play();
+      playAudio(flipCardAudio);
       setTimeout(() => {
         setCardsShowing(true);
         shufflePokemons();
@@ -121,11 +124,13 @@ function App() {
     setStartScreen(true);
   }
 
-  if (loading) return <LoadingScreen next={level} />;
-
   return (
     <div className="App">
-      {startScreen ? (
+      <BGMToggle isGameOver={isGameOver} />
+
+      {loading ? (
+        <LoadingScreen next={level} />
+      ) : startScreen ? (
         <StartScreen
           onStart={() => {
             setStartScreen(false);

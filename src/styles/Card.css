@@ -82,6 +82,7 @@
   max-width: 100%;
   text-transform: capitalize;
   color: white;
+  font-size: 15px;
 }
 @keyframes flip-card {
   from {

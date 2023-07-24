@@ -9,7 +9,7 @@ export default function Score({ currentScore, bestScore, level }) {
       <p className="best-score">
         High Score:{" "}
         <span>
-          <i className="nes-icon trophy is-small" />
+          <i className="nes-icon trophy" />
           <b>{bestScore}</b>
         </span>
       </p>

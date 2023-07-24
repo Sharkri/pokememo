@@ -1,0 +1,20 @@
+.bgm-toggle {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  background-color: #f8f3f8;
+  border-radius: 999px;
+  padding: 8px;
+  z-index: 3;
+  border: 0;
+  width: 48px;
+  height: 48px;
+}
+
+.bgm-toggle:focus {
+  outline: 0;
+}
+
+.bgm-toggle:focus-visible {
+  outline: 2px solid black;
+}

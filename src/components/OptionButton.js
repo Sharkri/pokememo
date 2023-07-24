@@ -1,12 +1,14 @@
 import "../styles/OptionButton.css";
-import pokemonAButtonSound from "../assets/pokemon-a-button.mp3";
-const pokemonAButtonAudio = new Audio(pokemonAButtonSound, { volume: 0.2 });
+import clickSound from "../assets/pokemon-a-button.mp3";
+import playAudio from "../playAudio";
+const clickAudio = new Audio(clickSound);
+clickAudio.volume = 0.3;
 
 export default function OptionButton({ onClick, children }) {
   return (
     <button
       onClick={() => {
-        pokemonAButtonAudio.play();
+        playAudio(clickAudio);
         onClick();
       }}
       className="option-button"
