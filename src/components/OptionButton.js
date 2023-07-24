@@ -4,13 +4,14 @@ import playAudio from "../playAudio";
 const clickAudio = new Audio(clickSound);
 clickAudio.volume = 0.3;
 
-export default function OptionButton({ onClick, children }) {
+export default function OptionButton({ onClick, children, type = "button" }) {
   return (
     <button
       onClick={() => {
         playAudio(clickAudio);
-        onClick();
+        onClick?.();
       }}
+      type={type}
       className="option-button"
     >
       {children}

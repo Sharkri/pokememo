@@ -13,3 +13,7 @@ main {
   justify-content: center;
   margin: 32px 0;
 }
+
+.score-progress {
+  text-align: center;
+}

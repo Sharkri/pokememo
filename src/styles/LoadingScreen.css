@@ -11,6 +11,9 @@
 .pokemon-loading-screen p {
   font-size: 20px;
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 8px;
+  border-radius: 24px;
 }
 
 .ball-spinner {

@@ -3,7 +3,7 @@ import uniqid from "uniqid";
 
 export default function usePokemons() {
   const [pokemons, setPokemons] = useState([]);
-  const POSSIBLE_POKEMONS = 721;
+  const POSSIBLE_POKEMONS = 721; // Up to gen 6
 
   const getPokemon = async ({ id, shiny }) => {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);

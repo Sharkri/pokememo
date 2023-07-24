@@ -19,8 +19,8 @@ const flipCardAudio = new Audio(flipCardSound);
 flipCardAudio.volume = 0.4;
 
 function App() {
-  const initializePokemons = async () => {
-    const randomPkmns = getRandomPokemons(INITIAL_CARD_AMOUNT);
+  const initializePokemons = async (amount) => {
+    const randomPkmns = getRandomPokemons(amount);
 
     setLoading(true);
 
@@ -34,7 +34,6 @@ function App() {
   };
 
   const INCREMENT_STEP = 2;
-  const INITIAL_CARD_AMOUNT = 4;
   const CARD_SLEEP_TIME = 800;
   const MIN_LOAD_TIME = 250;
 
@@ -44,8 +43,8 @@ function App() {
   const [bestScore, setBestScore] = useState(
     localStorage.getItem("best-score") || 0
   );
-  const [isGameOver, setIsGameOver] = useState(false);
-  const [level, setLevel] = useState(1);
+  const [gameOver, setGameOver] = useState(false);
+  const [scoreGoal, setScoreGoal] = useState(null);
   const [cardsShowing, setCardsShowing] = useState(false);
   const [startScreen, setStartScreen] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -66,7 +65,6 @@ function App() {
   function handleLevelUp() {
     playAudio(levelUpAudio);
 
-    setLevel((prevLevel) => prevLevel + 1);
     // Add current card amount/length + increment step
     const randomPkmns = getRandomPokemons(pokemons.length + INCREMENT_STEP);
     setLoading(true);
@@ -85,11 +83,11 @@ function App() {
   }
 
   async function handleCardClick(cardIndex) {
-    if (isGameOver || !cardsShowing) return;
+    if (gameOver || !cardsShowing) return;
 
     const card = pokemons[cardIndex];
     if (card.isClicked) {
-      setIsGameOver(true);
+      setGameOver("lose");
       return;
     }
 
@@ -97,68 +95,70 @@ function App() {
     incrementScore();
     setCardsShowing(false);
 
-    // check if every card has been clicked
-    if (pokemons.every((card) => card.isClicked)) handleLevelUp();
-    else {
+    // if every card being clicked is false
+    if (!pokemons.every((card) => card.isClicked)) {
       playAudio(flipCardAudio);
       setTimeout(() => {
         setCardsShowing(true);
         shufflePokemons();
       }, CARD_SLEEP_TIME);
+      return;
     }
+
+    const isWin = pokemons.length === scoreGoal;
+    if (isWin) setGameOver("win");
+    else handleLevelUp();
   }
 
-  function resetScores() {
-    setCurrentScore(0);
-    setLevel(1);
-  }
   function playAgain() {
-    setIsGameOver(false);
-    resetScores();
-    initializePokemons();
+    setGameOver(false);
+    setCurrentScore(0);
+    initializePokemons(scoreGoal);
   }
 
   function handleQuit() {
-    setIsGameOver(false);
-    resetScores();
+    setGameOver(false);
+    setCurrentScore(0);
     setStartScreen(true);
   }
-
   return (
     <div className="App">
-      <BGMToggle isGameOver={isGameOver} />
+      <BGMToggle status={gameOver} />
 
       {loading ? (
-        <LoadingScreen next={level} />
+        <LoadingScreen />
       ) : startScreen ? (
         <StartScreen
-          onStart={() => {
+          onStart={(cardScoreGoal) => {
             setStartScreen(false);
-            initializePokemons();
+            setScoreGoal(cardScoreGoal);
+            initializePokemons(cardScoreGoal);
           }}
         />
       ) : (
         <>
-          {isGameOver && (
+          {gameOver && (
             <GameOverModal
+              status={gameOver}
               score={currentScore}
-              level={level}
               onPlayAgain={playAgain}
               onQuit={handleQuit}
+              onContinue={() => {
+                setGameOver(false);
+                handleLevelUp();
+              }}
             />
           )}
           <Header onQuit={handleQuit}>
-            <Score
-              currentScore={currentScore}
-              bestScore={bestScore}
-              level={level}
-            />
+            <Score currentScore={currentScore} bestScore={bestScore} />
           </Header>
 
           <Main
             cards={pokemons}
             cardsShowing={cardsShowing}
             onClick={handleCardClick}
+            score={currentScore}
+            scoreGoal={scoreGoal}
           />
         </>
       )}

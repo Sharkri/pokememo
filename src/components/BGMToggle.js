@@ -2,7 +2,8 @@ import { useState } from "react";
 import "../styles/BGMToggle.css";
 import clickSound from "../assets/pokemon-a-button.mp3";
 import playAudio from "../playAudio";
-import bgm from "../assets/route209.mp3";
+import route209 from "../assets/route209.mp3";
+import victoryBGM from "../assets/victory.mp3";
 import ReactHowler from "react-howler";
 
 const clickAudio = new Audio(clickSound);
@@ -10,7 +11,7 @@ clickAudio.volume = 0.3;
 
 const initialBgmOn = JSON.parse(localStorage.getItem("bgm-on"));
 
-function BGMToggle({ isGameOver }) {
+function BGMToggle({ status }) {
   const [isBGMOn, setIsBGMOn] = useState(
     initialBgmOn === null ? true : initialBgmOn
   );
@@ -19,7 +20,15 @@ function BGMToggle({ isGameOver }) {
 
   return (
     <>
-      <ReactHowler src={bgm} volume={0.2} loop playing={isBGMOn} />
+      <ReactHowler
+        src={route209}
+        volume={status === "win" ? 0.03 : status === "lose" ? 0.07 : 0.14}
+        loop
+        playing={isBGMOn}
+      />
+      {status === "win" && (
+        <ReactHowler src={victoryBGM} volume={0.22} loop playing={isBGMOn} />
+      )}
 
       <button
         className="bgm-toggle"

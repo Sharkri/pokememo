@@ -1,9 +1,14 @@
 import Card from "./Card";
 import "../styles/Main.css";
 
-export default function Main({ cards, onClick, cardsShowing }) {
+function Main({ cards, onClick, cardsShowing, scoreGoal, score }) {
   return (
     <main>
+      {score < scoreGoal && (
+        <p className="score-progress">
+          {score}/{scoreGoal}
+        </p>
+      )}
       <div className="cards">
         {cards.map((card, index) => (
           <Card
@@ -17,3 +22,4 @@ export default function Main({ cards, onClick, cardsShowing }) {
     </main>
   );
 }
+export default Main;

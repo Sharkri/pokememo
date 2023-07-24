@@ -1,10 +1,10 @@
 import "../styles/LoadingScreen.css";
 
-export default function LoadingScreen({ next }) {
+export default function LoadingScreen() {
   return (
     <div className="pokemon-loading-screen">
       <div className="ball-spinner" />
-      <p>Loading Level {next}</p>
+      <p>Loading Pokemon</p>
     </div>
   );
 }

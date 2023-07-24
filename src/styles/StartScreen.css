@@ -13,13 +13,26 @@
   border-right: 0.15em solid black; /* The typwriter cursor */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   animation: typing 1s steps(60, end), blink-caret 0.75s step-end infinite;
+  text-align: center;
 }
 
 .start-options {
   display: flex;
   flex-direction: column;
-  margin-top: 18px;
+}
+
+.start-screen-modal-content form {
+  margin-top: 24px;
   animation: appear 1s;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.level-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 @keyframes appear {

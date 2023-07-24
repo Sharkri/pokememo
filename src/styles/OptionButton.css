@@ -11,11 +11,7 @@
   border: 0;
 }
 
-.option-button:focus-visible {
-  border: 0;
-  outline: 0;
-}
-
+.option-button:focus,
 .option-button:active {
   outline: 0;
 }
