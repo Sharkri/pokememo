@@ -22,7 +22,7 @@ function BGMToggle({ status }) {
     <>
       <ReactHowler
         src={route209}
-        volume={status === "win" ? 0.03 : 0.14}
+        volume={status === "win" ? 0.03 : 0.1}
         loop
         playing={isBGMOn}
       />
