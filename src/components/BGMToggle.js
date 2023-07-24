@@ -12,15 +12,10 @@ const initialBgmOn = JSON.parse(localStorage.getItem("bgm-on"));
 
 function BGMToggle({ isGameOver }) {
   const [isBGMOn, setIsBGMOn] = useState(
-    initialBgmOn === undefined ? true : initialBgmOn
+    initialBgmOn === null ? true : initialBgmOn
   );
 
-  console.log(isBGMOn, localStorage);
   const imgName = isBGMOn ? "music-on" : "music-off";
-
-  // useEffect(() => {
-  //   if (isGameOver) setIsBGMOn(false);
-  // }, [isGameOver]);
 
   return (
     <>
