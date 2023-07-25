@@ -2,6 +2,10 @@ import { useState } from "react";
 import "../styles/StartScreen.css";
 import Modal from "./Modal";
 import OptionButton from "./OptionButton";
+import clickSound from "../assets/pokemon-a-button.mp3";
+import playAudio from "../playAudio";
+const clickAudio = new Audio(clickSound);
+clickAudio.volume = 0.3;
 
 function RadioInput({ defaultChecked, value, labelText, onChange }) {
   return (
@@ -19,13 +23,18 @@ function RadioInput({ defaultChecked, value, labelText, onChange }) {
 }
 
 export default function StartScreen({ onStart }) {
-  const cardGoals = [5, 10, 20];
+  const cardGoals = [5, 10, 18];
 
   const [cardGoal, setCardGoal] = useState(cardGoals[0]);
 
   const handleStartGame = (e) => {
     e.preventDefault();
     onStart(cardGoal);
+  };
+
+  const handleChange = (newCardGoal) => {
+    setCardGoal(newCardGoal);
+    playAudio(clickAudio);
   };
 
   return (
@@ -37,19 +46,19 @@ export default function StartScreen({ onStart }) {
           <div className="level-options">
             <RadioInput
               value={cardGoals[0]}
-              labelText="Level 1"
+              labelText="Easy"
               defaultChecked
-              onChange={setCardGoal}
+              onChange={handleChange}
             />
             <RadioInput
               value={cardGoals[1]}
-              labelText="Level 2"
-              onChange={setCardGoal}
+              labelText="Medium"
+              onChange={handleChange}
             />
             <RadioInput
               value={cardGoals[2]}
-              labelText="Level 3"
-              onChange={setCardGoal}
+              labelText="Hard"
+              onChange={handleChange}
             />
           </div>
 
