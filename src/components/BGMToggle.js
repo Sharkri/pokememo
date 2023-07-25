@@ -12,7 +12,9 @@ clickAudio.volume = 0.3;
 const initialBgmOn = JSON.parse(localStorage.getItem("bgm-on"));
 
 function BGMToggle({ status }) {
-  const [isBGMOn, setIsBGMOn] = useState(initialBgmOn || false);
+  const [isBGMOn, setIsBGMOn] = useState(
+    initialBgmOn === null ? true : initialBgmOn
+  );
 
   const imgName = isBGMOn ? "music-on" : "music-off";
 
