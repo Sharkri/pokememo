@@ -14,9 +14,9 @@ import playAudio from "./playAudio";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const levelUpAudio = new Audio(levelUpSound);
-levelUpAudio.volume = 0.3;
+levelUpAudio.volume = 0.2;
 const flipCardAudio = new Audio(flipCardSound);
-flipCardAudio.volume = 0.4;
+flipCardAudio.volume = 0.2;
 
 function App() {
   const initializePokemons = async (amount) => {
@@ -43,10 +43,9 @@ function App() {
   const [bestScore, setBestScore] = useState(
     localStorage.getItem("best-score") || 0
   );
-  const [gameOver, setGameOver] = useState(false);
+  const [gameStatus, setGameStatus] = useState("start");
   const [scoreGoal, setScoreGoal] = useState(null);
   const [cardsShowing, setCardsShowing] = useState(false);
-  const [startScreen, setStartScreen] = useState(true);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -83,11 +82,11 @@ function App() {
   }
 
   async function handleCardClick(cardIndex) {
-    if (gameOver || !cardsShowing) return;
+    if (gameStatus !== "game" || !cardsShowing) return;
 
     const card = pokemons[cardIndex];
     if (card.isClicked) {
-      setGameOver("lose");
+      setGameStatus("lose");
       return;
     }
 
@@ -106,49 +105,49 @@ function App() {
     }
 
     const isWin = pokemons.length === scoreGoal;
-    if (isWin) setGameOver("win");
+    if (isWin) setGameStatus("win");
     else handleLevelUp();
   }
 
   function playAgain() {
-    setGameOver(false);
+    setGameStatus("game");
     setCurrentScore(0);
     initializePokemons(scoreGoal);
   }
 
   function handleQuit() {
-    setGameOver(false);
+    setGameStatus("start");
     setCurrentScore(0);
-    setStartScreen(true);
   }
   return (
     <div className="App">
-      <BGMToggle status={gameOver} />
+      <BGMToggle status={gameStatus} />
 
       {loading ? (
         <LoadingScreen />
-      ) : startScreen ? (
+      ) : gameStatus === "start" ? (
         <StartScreen
           onStart={(cardScoreGoal) => {
-            setStartScreen(false);
+            setGameStatus("game");
             setScoreGoal(cardScoreGoal);
             initializePokemons(cardScoreGoal);
           }}
         />
       ) : (
         <>
-          {gameOver && (
+          {(gameStatus === "win" || gameStatus === "lose") && (
             <GameOverModal
-              status={gameOver}
+              status={gameStatus}
               score={currentScore}
               onPlayAgain={playAgain}
               onQuit={handleQuit}
               onContinue={() => {
-                setGameOver(false);
+                setGameStatus("game");
                 handleLevelUp();
               }}
             />
           )}
+
           <Header onQuit={handleQuit}>
             <Score currentScore={currentScore} bestScore={bestScore} />
           </Header>

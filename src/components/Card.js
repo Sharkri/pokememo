@@ -18,34 +18,32 @@ export default function Card({ card, onClick, cardsShowing }) {
       glareMaxOpacity={0.4}
       glareColor={card.shiny ? "#f1b818" : "#fff"}
       glarePosition="all"
-      className={
+      className={`card-container ${cardsShowing ? "front" : "back"} ${
         cardsShowing && interactable ? undefined : "pointer-events-none"
-      }
+      }`}
     >
-      <div className={`card-container ${cardsShowing ? "front" : "back"}`}>
-        <div className="card-inner">
-          <div className="card-front">
-            <button className="card" data-shiny={card.shiny} onClick={onClick}>
-              {card.shiny && <div className="shiny-symbol" />}
+      <div className="card-inner">
+        <div className="card-front">
+          <button className="card" data-shiny={card.shiny} onClick={onClick}>
+            {card.shiny && <div className="shiny-symbol" />}
 
-              <img
-                src={card.image}
-                alt={card.name}
-                className="card-image"
-                draggable="false"
-              />
-              <p className="card-name">
-                <span className="name">{card.name}</span>
-              </p>
-            </button>
-          </div>
-          <div className="card-back">
             <img
-              src={`${process.env.PUBLIC_URL}/card-back.png`}
-              alt="pokemon card back"
-              className="back"
+              src={card.image}
+              alt={card.name}
+              className="card-image"
+              draggable="false"
             />
-          </div>
+            <p className="card-name">
+              <span className="name">{card.name}</span>
+            </p>
+          </button>
+        </div>
+        <div className="card-back">
+          <img
+            src={`${process.env.PUBLIC_URL}/card-back.png`}
+            alt="pokemon card back"
+            className="back"
+          />
         </div>
       </div>
     </Tilt>

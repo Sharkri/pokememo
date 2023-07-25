@@ -2,8 +2,8 @@ import { useState } from "react";
 import "../styles/BGMToggle.css";
 import clickSound from "../assets/pokemon-a-button.mp3";
 import playAudio from "../playAudio";
-import route209 from "../assets/route209.mp3";
 import victoryBGM from "../assets/victory.mp3";
+import openingBGM from "../assets/opening.mp3";
 import ReactHowler from "react-howler";
 
 const clickAudio = new Audio(clickSound);
@@ -19,11 +19,12 @@ function BGMToggle({ status }) {
   return (
     <>
       <ReactHowler
-        src={route209}
-        volume={status === "win" ? 0.03 : 0.1}
+        src={openingBGM}
+        volume={0.18}
         loop
-        playing={isBGMOn}
+        playing={isBGMOn && status !== "win"}
       />
+
       {status === "win" && (
         <ReactHowler src={victoryBGM} volume={0.22} loop playing={isBGMOn} />
       )}
