@@ -48,10 +48,6 @@ function App() {
   const [cardsShowing, setCardsShowing] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    localStorage.setItem("visited", true);
-  }, []);
-
   function incrementScore() {
     const incrementedScore = currentScore + 1;
     setCurrentScore(incrementedScore);
@@ -84,18 +80,16 @@ function App() {
   async function handleCardClick(cardIndex) {
     if (gameStatus !== "game" || !cardsShowing) return;
 
+    setCardsShowing(false);
+
     const card = pokemons[cardIndex];
-    if (card.isClicked) {
-      setGameStatus("lose");
-      return;
-    }
+    if (card.isClicked) return setGameStatus("lose");
 
     updateCardsClicked(cardIndex);
     incrementScore();
-    setCardsShowing(false);
 
-    // if every card being clicked is false
-    if (!pokemons.every((card) => card.isClicked)) {
+    const everyCardClicked = pokemons.every((card) => card.isClicked);
+    if (!everyCardClicked) {
       playAudio(flipCardAudio);
       setTimeout(() => {
         setCardsShowing(true);

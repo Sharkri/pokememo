@@ -14,9 +14,10 @@ export default function usePokemons() {
   const getRandomPokemons = async (amount) => {
     const pokemonsToShow = [];
     let tries = 0;
-
     const isFirstVisit = localStorage.getItem("visited") === null;
-    const shiny = Math.random() > (isFirstVisit ? 0.5 : 0.9);
+    if (isFirstVisit) localStorage.setItem("visited", true);
+
+    const shiny = Math.random() > (isFirstVisit ? 0.55 : 0.9);
     while (pokemonsToShow.length < amount && tries < 100) {
       const randomId = Math.floor(Math.random() * POSSIBLE_POKEMONS) + 1;
 
