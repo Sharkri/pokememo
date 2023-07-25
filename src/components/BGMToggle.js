@@ -20,13 +20,13 @@ function BGMToggle({ status }) {
     <>
       <ReactHowler
         src={openingBGM}
-        volume={0.18}
+        volume={0.2}
         loop
         playing={isBGMOn && status !== "win"}
       />
 
       {status === "win" && (
-        <ReactHowler src={victoryBGM} volume={0.22} loop playing={isBGMOn} />
+        <ReactHowler src={victoryBGM} volume={0.2} loop playing={isBGMOn} />
       )}
 
       <button
