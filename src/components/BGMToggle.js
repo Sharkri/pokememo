@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import "../styles/BGMToggle.css";
 import clickSound from "../assets/pokemon-a-button.mp3";
 import playAudio from "../playAudio";
@@ -47,4 +47,4 @@ function BGMToggle({ status }) {
   );
 }
 
-export default BGMToggle;
+export default memo(BGMToggle);
