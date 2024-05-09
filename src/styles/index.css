@@ -42,3 +42,12 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
 }
+
+.nes-radio:checked + span::before {
+  animation: blink 0.75s step-start 0s infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
