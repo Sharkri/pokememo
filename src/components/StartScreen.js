@@ -12,7 +12,7 @@ export default function StartScreen({ onStart }) {
       <div className="start-screen-modal-content modal-content">
         <p className="ask-text">Select a difficulty level</p>
 
-        <div class="start-screen-menu">
+        <div className="start-screen-menu">
           <LevelSelectOptions onStartGame={onStart} />
           <OptionButton
             onClick={() =>
