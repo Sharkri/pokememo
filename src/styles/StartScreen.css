@@ -1,5 +1,7 @@
 .start-screen-modal-content {
   padding: 16px;
+  /* Fixed width to stop typewriter effect from updating modal width */
+  width: 467px;
 }
 
 .github-repo:hover,
@@ -11,20 +13,14 @@
 .ask-text {
   overflow: hidden; /* Ensures the content is not revealed until the animation */
   border-right: 0.1em solid black; /* The typwriter cursor */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: -0.05em;
-  animation: typing 0.9s steps(60, end), blink-caret 0.75s step-end infinite;
-  text-align: center;
+  letter-spacing: -0.02em;
+  animation: typing 1.05s steps(90, end), blink-caret 0.75s step-end infinite;
+  font-family: Pokemon;
 }
 
-.start-options {
-  display: flex;
-  flex-direction: column;
-}
-
-.start-screen-modal-content form {
+.start-screen-modal-content .start-screen-menu {
   margin-top: 24px;
-  animation: appear 0.9s;
+  animation: appear 1.05s;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -33,8 +29,7 @@
 .level-options {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
+  flex-direction: column;
   margin: 8px 0;
   letter-spacing: -0.08em;
 }
