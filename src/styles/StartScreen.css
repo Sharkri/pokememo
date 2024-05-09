@@ -15,7 +15,6 @@
   border-right: 0.1em solid black; /* The typwriter cursor */
   letter-spacing: -0.02em;
   animation: typing 1.05s steps(90, end), blink-caret 0.75s step-end infinite;
-  font-family: Pokemon;
 }
 
 .start-screen-modal-content .start-screen-menu {
