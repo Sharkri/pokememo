@@ -31,8 +31,8 @@ function RadioInput({ checked, labelText, onClick }) {
 export default function LevelSelectOptions({ onStartGame }) {
   const [selectedLevel, setSelectedLevel] = useState(levels[0]);
 
-  const handleEnter = () => {
-    onStartGame(selectedLevel.goal);
+  const handleEnter = (goal) => {
+    onStartGame(goal);
     playAudio(clickAudio);
   };
 
@@ -48,7 +48,10 @@ export default function LevelSelectOptions({ onStartGame }) {
   };
 
   return (
-    <RadioOptions onNavigate={handleNavigate} onEnter={handleEnter}>
+    <RadioOptions
+      onNavigate={handleNavigate}
+      onEnter={() => handleEnter(selectedLevel.goal)}
+    >
       <div className="level-options">
         {levels.map((level) => (
           <RadioInput
@@ -56,7 +59,7 @@ export default function LevelSelectOptions({ onStartGame }) {
             labelText={level.label}
             onClick={() => {
               setSelectedLevel(level);
-              handleEnter();
+              handleEnter(level.goal);
             }}
             key={level.index}
           />
