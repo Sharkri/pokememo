@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/pokememo/static/css/main.6ef472a1.css",
-    "main.js": "/pokememo/static/js/main.7db601aa.js",
+    "main.css": "/pokememo/static/css/main.27daef6a.css",
+    "main.js": "/pokememo/static/js/main.3a084c84.js",
     "static/media/opening.mp3": "/pokememo/static/media/opening.ff9e880a1993559fb813.mp3",
+    "static/media/70a1bt.ttf": "/pokememo/static/media/70a1bt.800fa0db9e77e8852615.ttf",
     "static/media/victory.mp3": "/pokememo/static/media/victory.6cc497d769a5aee7b94b.mp3",
     "static/media/levelup.mp3": "/pokememo/static/media/levelup.4c527006306938f7b298.mp3",
     "static/media/pokemon-a-button.mp3": "/pokememo/static/media/pokemon-a-button.8ce10c3537478b2f1cb2.mp3",
@@ -11,11 +12,11 @@
     "static/media/flip.mp3": "/pokememo/static/media/flip.affcda3a02c0211e6a7c.mp3",
     "index.html": "/pokememo/index.html",
     "static/media/sparkle.webp": "/pokememo/static/media/sparkle.62f36c0d7ab287402050.webp",
-    "main.6ef472a1.css.map": "/pokememo/static/css/main.6ef472a1.css.map",
-    "main.7db601aa.js.map": "/pokememo/static/js/main.7db601aa.js.map"
+    "main.27daef6a.css.map": "/pokememo/static/css/main.27daef6a.css.map",
+    "main.3a084c84.js.map": "/pokememo/static/js/main.3a084c84.js.map"
   },
   "entrypoints": [
-    "static/css/main.6ef472a1.css",
-    "static/js/main.7db601aa.js"
+    "static/css/main.27daef6a.css",
+    "static/js/main.3a084c84.js"
   ]
 }
