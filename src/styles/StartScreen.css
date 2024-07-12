@@ -12,9 +12,8 @@
 
 .ask-text {
   overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: 0.1em solid black; /* The typwriter cursor */
   letter-spacing: -0.02em;
-  animation: typing 1s steps(90, end), blink-caret 0.75s step-end infinite;
+  animation: typing 1s steps(90, end);
 }
 
 .start-screen-modal-content .start-screen-menu {
@@ -53,16 +52,5 @@
   to {
     white-space: nowrap;
     width: 100%;
-  }
-}
-
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: black;
   }
 }

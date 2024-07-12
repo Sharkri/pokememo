@@ -4,7 +4,8 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 24px;
-  color: rgb(41, 39, 39);
+  color: rgb(51, 43, 43);
+  font-size: 14px;
 }
 
 .stats .best-score {

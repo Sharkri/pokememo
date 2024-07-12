@@ -2,9 +2,8 @@
   position: fixed;
   top: 8px;
   left: 8px;
-  background-color: #f8f3f8;
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 999px;
-  padding: 8px;
   z-index: 3;
   border: 0;
   width: 48px;

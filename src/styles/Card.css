@@ -83,6 +83,7 @@
   text-transform: capitalize;
   color: white;
   font-size: 15px;
+  margin-bottom: 0;
 }
 @keyframes flip-card {
   from {
